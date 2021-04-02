@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-//using System.Xml.Serialization;
-//using System.IO;
+using System.Xml.Serialization;
+using System.IO;
 
 public class BattleData : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class BattleData : MonoBehaviour
 
     public Tilemap Ground;
     public Dictionary<Vector3, TileData> tiles;
+
+    public List<TileData> tile_data;
 
     //private Circular_linkedList turn_order?
     //public TileDataArray[] BattleMap;
@@ -35,6 +37,7 @@ public class BattleData : MonoBehaviour
     private void GetTiles()
     {
         tiles = new Dictionary<Vector3, TileData>();
+        tile_data = new List<TileData>();
         foreach(Vector3Int pos in Ground.cellBounds.allPositionsWithin)
         {
             var localPlace = new Vector3Int(pos.x, pos.y, pos.z);
@@ -44,7 +47,7 @@ public class BattleData : MonoBehaviour
             {
                 LocalPlace = localPlace,
                 WorldLocation = Ground.CellToWorld(localPlace),
-                TilemapMember = Ground,
+                //TilemapMember = Ground,
                 Blocked = false,
                 MoveCost = 1,
                 AccuracyCost = 1,
@@ -52,6 +55,7 @@ public class BattleData : MonoBehaviour
             };
 
             tiles.Add(tile.WorldLocation, tile);
+            tile_data.Add(tile);
         }
     }
 
@@ -63,10 +67,10 @@ public class BattleData : MonoBehaviour
 
         //Generate Turn_order
         //sortCharacters();
-        /*XmlSerializer serailizer = new XmlSerializer(typeof(List<TileData>));
+        XmlSerializer serailizer = new XmlSerializer(typeof(List<TileData>));
         FileStream stream = new FileStream(Application.dataPath + "/BattleMaps/TestBattle.xml", FileMode.Create);
         serailizer.Serialize(stream, tile_data);
-        stream.Close();*/
+        stream.Close();
 
 
 
