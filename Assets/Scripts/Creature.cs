@@ -9,14 +9,14 @@ public class Creature : MonoBehaviour
     public int Health;
     public int Move;
 
-    //private TileData space;
+    private TileData space;
 
     void Start()
     {
         Vector3 point = transform.position;
         var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
-        //space = get_data(worldPoint);
-        //breadth_first_search(worldPoint);
+        space = get_data(worldPoint);
+        breadth_first_search(worldPoint);
 
         //var up = new Vector3Int(worldPoint.x, worldPoint.y + 1, 0);
         //var left = new Vector3Int(worldPoint.x - 1, worldPoint.y, 0);
@@ -37,7 +37,7 @@ public class Creature : MonoBehaviour
         }
     }*/
 
-    /*TileData get_data(Vector3Int p)
+    TileData get_data(Vector3Int p)
     {
         var tiles = BattleData.instance.tiles;
         TileData tile;
@@ -96,5 +96,4 @@ public class Creature : MonoBehaviour
             tile.Visited = true;
         }
     }
-    */
 }

@@ -9,8 +9,7 @@ public class TileData
     //Possible needed for adding script into Tiles
     public Vector3Int LocalPlace {get; set;}
     public Vector3 WorldLocation {get; set;}
-    //public TileBase TileBase {get; set;}
-    //public Tilemap TilemapMember {get; set;}
+    public Tilemap TilemapMember {get; set;}
 
     //Original data for each tile
     public bool Blocked {get; set; }

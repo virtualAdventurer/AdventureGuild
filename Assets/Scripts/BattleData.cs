@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Xml.Serialization;
-using System.IO;
+//using System.Xml.Serialization;
+//using System.IO;
 
 public class BattleData : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public class BattleData : MonoBehaviour
             {
                 LocalPlace = localPlace,
                 WorldLocation = Ground.CellToWorld(localPlace),
-                //TilemapMember = Ground,
+                TilemapMember = Ground,
                 Blocked = false,
                 MoveCost = 1,
                 AccuracyCost = 1,
@@ -67,11 +67,14 @@ public class BattleData : MonoBehaviour
 
         //Generate Turn_order
         //sortCharacters();
+
+        //Serializer: move to new location
+        /*
         XmlSerializer serailizer = new XmlSerializer(typeof(List<TileData>));
         FileStream stream = new FileStream(Application.dataPath + "/BattleMaps/TestBattle.xml", FileMode.Create);
         serailizer.Serialize(stream, tile_data);
         stream.Close();
-
+        */
 
 
         Turn = 0;
