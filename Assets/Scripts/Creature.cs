@@ -22,6 +22,7 @@ public class Creature : MonoBehaviour
         foreach ((TileData, int) i_space in test)
         {
             Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
+            i_space.Item1.Visited = false;
         }
 
         //var up = new Vector3Int(worldPoint.x, worldPoint.y + 1, 0);
