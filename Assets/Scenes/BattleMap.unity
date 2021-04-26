@@ -642,7 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CreatureName: Test1
   Health: 100
-  Move: 7
+  Move: 3
 --- !u!1 &1085471876
 GameObject:
   m_ObjectHideFlags: 0

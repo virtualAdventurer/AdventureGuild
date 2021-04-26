@@ -21,7 +21,7 @@ public class Creature : MonoBehaviour
         Debug.Log("Total Number of Spaces: " + test.Count);
         foreach ((TileData, int) i_space in test)
         {
-            Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
+            //Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
             i_space.Item1.Visited = false;
         }
 
