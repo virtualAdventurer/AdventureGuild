@@ -44,6 +44,26 @@ public class Creature : MonoBehaviour
         }
     }*/
 
+    void OnUp()
+    {
+        Debug.Log("Up pressed");
+    }
+
+    void OnDown()
+    {
+        Debug.Log("Down pressed");
+    }
+
+    void OnLeft()
+    {
+        Debug.Log("Left pressed");
+    }
+
+    void OnRight()
+    {
+        Debug.Log("Right pressed");
+    }
+
     TileData get_data(Vector3Int p)
     {
         var tiles = BattleData.instance.tiles;
