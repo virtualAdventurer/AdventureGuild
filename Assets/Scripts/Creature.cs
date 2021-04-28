@@ -8,22 +8,9 @@ public class Creature : MonoBehaviour
     public string CreatureName;
     public int Health;
     public int Move;
-
-    private TileData space;
  
     void Start()
     {
-        Vector3 point = transform.position;
-        var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
-        space = get_data(worldPoint);
-        var test = breadth_first_search(worldPoint);
-
-        Debug.Log("Total Number of Spaces: " + test.Count);
-        foreach ((TileData, int) i_space in test)
-        {
-            //Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
-            i_space.Item1.Visited = false;
-        }
 
         //var up = new Vector3Int(worldPoint.x, worldPoint.y + 1, 0);
         //var left = new Vector3Int(worldPoint.x - 1, worldPoint.y, 0);
@@ -44,26 +31,6 @@ public class Creature : MonoBehaviour
         }
     }*/
 
-    void OnUp()
-    {
-        Debug.Log("Up pressed");
-    }
-
-    void OnDown()
-    {
-        Debug.Log("Down pressed");
-    }
-
-    void OnLeft()
-    {
-        Debug.Log("Left pressed");
-    }
-
-    void OnRight()
-    {
-        Debug.Log("Right pressed");
-    }
-
     TileData get_data(Vector3Int p)
     {
         var tiles = BattleData.instance.tiles;
@@ -75,9 +42,18 @@ public class Creature : MonoBehaviour
         return tile;
     }
 
-
-    List<(TileData, int)> breadth_first_search(Vector3Int point)
+    TileData getSpace()
     {
+        Vector3 point = transform.position;
+        var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
+        return get_data(worldPoint);
+    }
+
+
+    public List<(TileData, int)> breadth_first_search()
+    {
+        TileData space = getSpace();
+
         Queue<(TileData, int)> need_to_visit = new Queue<(TileData, int)>();
         List<(TileData, int)> can_reach = new List<(TileData, int)>();
         need_to_visit.Enqueue((space, 0));

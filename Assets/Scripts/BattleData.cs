@@ -10,11 +10,13 @@ public class BattleData : MonoBehaviour
     //Bad Singleton Pattern?
     public static BattleData instance;
     public List<Creature> CharacterList;
+    public Creature player;
 
     public Tilemap Ground;
     public Dictionary<Vector3, TileData> tiles;
 
     public List<TileData> tile_data;
+
 
     //private Circular_linkedList turn_order?
     //public TileDataArray[] BattleMap;
@@ -76,6 +78,14 @@ public class BattleData : MonoBehaviour
         stream.Close();
         */
 
+        var test = player.breadth_first_search();
+
+        Debug.Log("Total Number of Spaces: " + test.Count);
+        foreach ((TileData, int) i_space in test)
+        {
+            Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
+            i_space.Item1.Visited = false;
+        }
 
         Turn = 0;
     }
