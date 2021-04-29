@@ -153,7 +153,20 @@ public class BattleData : MonoBehaviour
 
     public void OnAccept()
     {
-        Debug.Log("Accept");
+        if(player_active)
+        {
+            player_active = false;
+            //Need to remove color, harder than thought
+            //TODO:Reappy tile? or find new way to indicate possible postions.
+            /*foreach(var tile_cost in player_spaces)
+            {
+                TileData tile = tile_cost.Item1;
+                tile.TilemapMember.SetTileFlags(tile.LocalPlace, TileFlags.None);
+                tile.TilemapMember.SetColor(tile.LocalPlace, Color.clear);
+            }*/
+
+            player.transform.position = new Vector3(player_spaces[space_index].Item1.WorldLocation.x + 0.5f, player_spaces[space_index].Item1.WorldLocation.y + 0.5f, 0);
+        }
     }
 
 }
