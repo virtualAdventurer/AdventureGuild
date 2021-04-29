@@ -17,6 +17,13 @@ public class BattleData : MonoBehaviour
 
     public List<TileData> tile_data;
 
+    //flag used to determine if buttons are ready to be used.
+    private bool player_active = false;
+
+    //List of possible moves the player can make
+    //TODO:Find permenant home for this and organise.
+    private List<(TileData, int)> player_spaces;
+    private int space_index;
 
     //private Circular_linkedList turn_order?
     //public TileDataArray[] BattleMap;
@@ -64,30 +71,24 @@ public class BattleData : MonoBehaviour
 
     void Start()
     {
-        //Get Characters List and Battle Map
-        //Create Characters and map.
+        player_active = false;
+        Turn = 0;
 
-        //Generate Turn_order
-        //sortCharacters();
-
-        //Serializer: move to new location
-        /*
-        XmlSerializer serailizer = new XmlSerializer(typeof(List<TileData>));
-        FileStream stream = new FileStream(Application.dataPath + "/BattleMaps/TestBattle.xml", FileMode.Create);
-        serailizer.Serialize(stream, tile_data);
-        stream.Close();
-        */
-
+        //Current used for testing the movement action
+        //This will eventually be moved to a sperate function
         var test = player.breadth_first_search();
 
         Debug.Log("Total Number of Spaces: " + test.Count);
         foreach ((TileData, int) i_space in test)
         {
-            Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
+            //Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
             i_space.Item1.Visited = false;
         }
-
-        Turn = 0;
+        player_spaces = test;
+        space_index = 0;
+        player_spaces[0].Item1.TilemapMember.SetTileFlags(player_spaces[0].Item1.LocalPlace, TileFlags.None);
+        player_spaces[0].Item1.TilemapMember.SetColor(player_spaces[0].Item1.LocalPlace, Color.blue);
+        player_active = true;
     }
 
     public Creature getCurrentCreature()
@@ -112,5 +113,42 @@ public class BattleData : MonoBehaviour
         //How to get tile of where character is standing???
     }
 
+    public void OnUp()
+    {
+        if(player_active)
+        {
+            player_active = false;
+            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
+            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.green);
+
+            if(space_index < player_spaces.Count - 1)
+            {
+                space_index++;
+            }
+            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
+            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.blue);
+
+            player_active = true;
+        }
+    }
+
+    public void OnDown()
+    {
+        if(player_active)
+        {
+            player_active = false;
+            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
+            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.green);
+
+            if(space_index > 0)
+            {
+                space_index--;
+            }
+            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
+            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.blue);
+
+            player_active = true;
+        }
+    }
 
 }
