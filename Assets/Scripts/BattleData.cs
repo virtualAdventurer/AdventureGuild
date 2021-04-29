@@ -151,4 +151,9 @@ public class BattleData : MonoBehaviour
         }
     }
 
+    public void OnAccept()
+    {
+        Debug.Log("Accept");
+    }
+
 }
