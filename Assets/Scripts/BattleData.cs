@@ -11,6 +11,7 @@ public class BattleData : MonoBehaviour
     public static BattleData instance;
     public List<Creature> CharacterList;
     public Creature player;
+    public SelectorData selector;
 
     public Tilemap Ground;
     public Dictionary<Vector3, TileData> tiles;
@@ -60,7 +61,7 @@ public class BattleData : MonoBehaviour
                 Blocked = false,
                 MoveCost = 1,
                 AccuracyCost = 1,
-                Visited = false
+                Selectable = false
             };
 
             tiles.Add(tile.WorldLocation, tile);
@@ -82,12 +83,17 @@ public class BattleData : MonoBehaviour
         foreach ((TileData, int) i_space in test)
         {
             //Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
-            i_space.Item1.Visited = false;
+            i_space.Item1.Selectable = false;
         }
         player_spaces = test;
         space_index = 0;
-        player_spaces[0].Item1.TilemapMember.SetTileFlags(player_spaces[0].Item1.LocalPlace, TileFlags.None);
-        player_spaces[0].Item1.TilemapMember.SetColor(player_spaces[0].Item1.LocalPlace, Color.blue);
+
+
+
+        
+        selector.gameObject.SetActive(true);
+        //var selector_data = selector.getComponent<>
+        selector.move(0, 0);
         player_active = true;
     }
 
@@ -118,16 +124,7 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
-            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.green);
-
-            if(space_index < player_spaces.Count - 1)
-            {
-                space_index++;
-            }
-            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
-            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.blue);
-
+            selector.move(0, 1);
             player_active = true;
         }
     }
@@ -137,16 +134,27 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
-            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.green);
+            selector.move(0, -1);
+            player_active = true;
+        }
+    }
 
-            if(space_index > 0)
-            {
-                space_index--;
-            }
-            player_spaces[space_index].Item1.TilemapMember.SetTileFlags(player_spaces[space_index].Item1.LocalPlace, TileFlags.None);
-            player_spaces[space_index].Item1.TilemapMember.SetColor(player_spaces[space_index].Item1.LocalPlace, Color.blue);
+    public void OnRight()
+    {
+        if(player_active)
+        {
+            player_active = false;
+            selector.move(1, 0);
+            player_active = true;
+        }
+    }
 
+    public void OnLeft()
+    {
+        if(player_active)
+        {
+            player_active = false;
+            selector.move(-1, 0);
             player_active = true;
         }
     }
@@ -156,14 +164,6 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-            //Need to remove color, harder than thought
-            //TODO:Reappy tile? or find new way to indicate possible postions.
-            /*foreach(var tile_cost in player_spaces)
-            {
-                TileData tile = tile_cost.Item1;
-                tile.TilemapMember.SetTileFlags(tile.LocalPlace, TileFlags.None);
-                tile.TilemapMember.SetColor(tile.LocalPlace, Color.clear);
-            }*/
 
             player.transform.position = new Vector3(player_spaces[space_index].Item1.WorldLocation.x + 0.5f, player_spaces[space_index].Item1.WorldLocation.y + 0.5f, 0);
         }

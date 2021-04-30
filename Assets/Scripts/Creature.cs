@@ -57,7 +57,7 @@ public class Creature : MonoBehaviour
         Queue<(TileData, int)> need_to_visit = new Queue<(TileData, int)>();
         List<(TileData, int)> can_reach = new List<(TileData, int)>();
         need_to_visit.Enqueue((space, 0));
-        space.Visited = true;
+        space.Selectable = true;
 
         while(need_to_visit.Count > 0)
         {
@@ -81,7 +81,7 @@ public class Creature : MonoBehaviour
             if(current_cost <= Move)
             {
                 can_reach.Add((current_space, current_cost));
-                //Just for testing, add bittons here?
+                
                 current_space.TilemapMember.SetTileFlags(current_space.LocalPlace, TileFlags.None);
                 current_space.TilemapMember.SetColor(current_space.LocalPlace, Color.green);
             }
@@ -92,10 +92,10 @@ public class Creature : MonoBehaviour
     void breadth_add_to_queue(Queue<(TileData, int)> q, Vector3Int p, int c)
     {
         TileData tile = get_data(p);
-        if(tile != null && !tile.Visited && c <= Move)
+        if(tile != null && !tile.Selectable && c <= Move)
         {
             q.Enqueue((tile, c));
-            tile.Visited = true;
+            tile.Selectable = true;
         }
     }
 }

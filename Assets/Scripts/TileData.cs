@@ -18,7 +18,7 @@ public class TileData
     //public Creature character {get; set;}
 
     //Data for breadth first search
-    public bool Visited {get; set;}
+    public bool Selectable {get; set;}
     
 
 }
