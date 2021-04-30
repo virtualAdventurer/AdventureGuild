@@ -65,48 +65,28 @@ public class BattleData : MonoBehaviour
 
         
         selector.gameObject.SetActive(true);
-        selector.move(0, 0);
+        selector.transform.position = tiles[selector.getPosition()].WorldLocation;
         player_active = true;
     }
 
     public void OnUp()
     {
-        if(player_active)
-        {
-            player_active = false;
-            selector.move(0, 1);
-            player_active = true;
-        }
+        SpaceSelectHelper(0, 1);
     }
 
     public void OnDown()
     {
-        if(player_active)
-        {
-            player_active = false;
-            selector.move(0, -1);
-            player_active = true;
-        }
+        SpaceSelectHelper(0, -1);
     }
 
     public void OnRight()
     {
-        if(player_active)
-        {
-            player_active = false;
-            selector.move(1, 0);
-            player_active = true;
-        }
+        SpaceSelectHelper(1, 0);
     }
 
     public void OnLeft()
     {
-        if(player_active)
-        {
-            player_active = false;
-            selector.move(-1, 0);
-            player_active = true;
-        }
+        SpaceSelectHelper(-1, 0);
     }
 
     public void OnAccept()
@@ -115,8 +95,35 @@ public class BattleData : MonoBehaviour
         {
             player_active = false;
 
-            player.transform.position = new Vector3(selector.X + 0.5f, selector.Y + 0.05f, 0);
-            selector.gameObject.SetActive(false);
+            if(tiles[selector.getPosition()].Selectable)
+            {
+                player.transform.position = tiles[selector.getPosition()].WorldLocation;
+                selector.gameObject.SetActive(false);
+            }
+            else
+            {
+                player_active = true;
+            }
+        }
+    }
+
+    private void SpaceSelectHelper(int x, int y)
+    {
+        if(player_active)
+        {
+            player_active = false;
+            TileData tile;
+            Vector3 position = selector.getPosition();
+            position.x += x;
+            position.y += y;
+
+            if(tiles.TryGetValue(position, out tile))
+            {
+                selector.X += x;
+                selector.Y += y;
+                selector.transform.position = tile.WorldLocation;
+            }
+            player_active = true;
         }
     }
 

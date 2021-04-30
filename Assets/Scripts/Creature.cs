@@ -5,8 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Creature : MonoBehaviour
 {
-    public string CreatureName;
-    public int Health;
     public int Move;
  
     void Start()
