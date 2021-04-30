@@ -9,7 +9,6 @@ public class BattleData : MonoBehaviour
 {
     //Bad Singleton Pattern?
     public static BattleData instance;
-    public List<Creature> CharacterList;
     public Creature player;
     public SelectorData selector;
 
@@ -20,15 +19,6 @@ public class BattleData : MonoBehaviour
 
     //flag used to determine if buttons are ready to be used.
     private bool player_active = false;
-
-    //List of possible moves the player can make
-    //TODO:Find permenant home for this and organise.
-    private List<(TileData, int)> player_spaces;
-    private int space_index;
-
-    //private Circular_linkedList turn_order?
-    //public TileDataArray[] BattleMap;
-    private int Turn;
 
     private void Awake()
     {
@@ -58,9 +48,6 @@ public class BattleData : MonoBehaviour
                 LocalPlace = localPlace,
                 WorldLocation = Ground.CellToWorld(localPlace),
                 TilemapMember = Ground,
-                Blocked = false,
-                MoveCost = 1,
-                AccuracyCost = 1,
                 Selectable = false
             };
 
@@ -73,50 +60,13 @@ public class BattleData : MonoBehaviour
     void Start()
     {
         player_active = false;
-        Turn = 0;
 
-        //Current used for testing the movement action
-        //This will eventually be moved to a sperate function
-        var test = player.breadth_first_search();
-
-        Debug.Log("Total Number of Spaces: " + test.Count);
-        foreach ((TileData, int) i_space in test)
-        {
-            //Debug.Log(i_space.Item1.LocalPlace.x + ", " + i_space.Item1.LocalPlace.y);
-            i_space.Item1.Selectable = false;
-        }
-        player_spaces = test;
-        space_index = 0;
-
-
+        player.breadth_first_search();
 
         
         selector.gameObject.SetActive(true);
-        //var selector_data = selector.getComponent<>
         selector.move(0, 0);
         player_active = true;
-    }
-
-    public Creature getCurrentCreature()
-    {
-        return CharacterList[Turn];
-    }
-
-    //private void sortCharacters(){}
-    
-    public void nextTurn()
-    {
-        Turn++;
-        if(Turn >= CharacterList.Count)
-        {
-            Turn = 0;
-        }
-    }
-
-    private void move()
-    {
-        Creature unit = CharacterList[Turn];
-        //How to get tile of where character is standing???
     }
 
     public void OnUp()

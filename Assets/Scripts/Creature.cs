@@ -11,25 +11,8 @@ public class Creature : MonoBehaviour
  
     void Start()
     {
-
-        //var up = new Vector3Int(worldPoint.x, worldPoint.y + 1, 0);
-        //var left = new Vector3Int(worldPoint.x - 1, worldPoint.y, 0);
-        //var right = new Vector3Int(worldPoint.x + 1, worldPoint.y, 0);
-        //var down = new Vector3Int(worldPoint.x, worldPoint.y - 1, 0);
         
     }
-
-    /*void change_to_green(Vector3Int p)
-    {
-        var tiles = BattleData.instance.tiles;
-
-        TileData _tile;
-        if(tiles .TryGetValue(p, out _tile))
-        {
-            _tile.TilemapMember.SetTileFlags(_tile.LocalPlace, TileFlags.None);
-            _tile.TilemapMember.SetColor(_tile.LocalPlace, Color.green);
-        }
-    }*/
 
     TileData get_data(Vector3Int p)
     {

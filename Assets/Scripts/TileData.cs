@@ -12,9 +12,9 @@ public class TileData
     public Tilemap TilemapMember {get; set;}
 
     //Original data for each tile
-    public bool Blocked {get; set; }
-    public int MoveCost {get; set; }
-    public int AccuracyCost {get; set;}
+    //public bool Blocked {get; set; }
+    //public int MoveCost {get; set; }
+    //public int AccuracyCost {get; set;}
     //public Creature character {get; set;}
 
     //Data for breadth first search
