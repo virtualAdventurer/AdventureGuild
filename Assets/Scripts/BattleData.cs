@@ -45,13 +45,12 @@ public class BattleData : MonoBehaviour
             if(!Ground.HasTile(localPlace)) continue;
             var tile = new TileData
             {
-                LocalPlace = localPlace,
-                WorldLocation = Ground.CellToWorld(localPlace),
+                Location = Ground.CellToWorld(localPlace),
                 TilemapMember = Ground,
                 Selectable = false
             };
 
-            tiles.Add(tile.WorldLocation, tile);
+            tiles.Add(tile.Location, tile);
             tile_data.Add(tile);
         }
     }
@@ -65,7 +64,7 @@ public class BattleData : MonoBehaviour
 
         
         selector.gameObject.SetActive(true);
-        selector.transform.position = tiles[selector.getPosition()].WorldLocation;
+        selector.transform.position = tiles[selector.getPosition()].Location;
         player_active = true;
     }
 
@@ -97,7 +96,7 @@ public class BattleData : MonoBehaviour
 
             if(tiles[selector.getPosition()].Selectable)
             {
-                player.transform.position = tiles[selector.getPosition()].WorldLocation;
+                player.transform.position = tiles[selector.getPosition()].Location;
                 selector.gameObject.SetActive(false);
             }
             else
@@ -121,7 +120,7 @@ public class BattleData : MonoBehaviour
             {
                 selector.X += x;
                 selector.Y += y;
-                selector.transform.position = tile.WorldLocation;
+                selector.transform.position = tile.Location;
             }
             player_active = true;
         }

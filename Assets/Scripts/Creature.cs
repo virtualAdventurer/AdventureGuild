@@ -12,7 +12,7 @@ public class Creature : MonoBehaviour
         
     }
 
-    TileData get_data(Vector3Int p)
+    TileData get_data(Vector3 p)
     {
         var tiles = BattleData.instance.tiles;
         TileData tile;
@@ -47,30 +47,30 @@ public class Creature : MonoBehaviour
             TileData current_space = temp.Item1;
             int current_cost = temp.Item2;
 
-            var up = new Vector3Int(current_space.LocalPlace.x , current_space.LocalPlace.y + 1, 0);
+            var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
             breadth_add_to_queue(need_to_visit, up, current_cost + 1);
         
-            var left = new Vector3Int(current_space.LocalPlace.x - 1, current_space.LocalPlace.y, 0);
+            var left = new Vector3(current_space.Location.x - 1, current_space.Location.y, 0);
             breadth_add_to_queue(need_to_visit, left, current_cost + 1);
 
-            var right = new Vector3Int(current_space.LocalPlace.x + 1, current_space.LocalPlace.y, 0);
+            var right = new Vector3(current_space.Location.x + 1, current_space.Location.y, 0);
             breadth_add_to_queue(need_to_visit, right, current_cost + 1);
 
-            var down = new Vector3Int(current_space.LocalPlace.x, current_space.LocalPlace.y - 1, 0);
+            var down = new Vector3(current_space.Location.x, current_space.Location.y - 1, 0);
             breadth_add_to_queue(need_to_visit, down, current_cost + 1);
 
             if(current_cost <= Move)
             {
                 can_reach.Add((current_space, current_cost));
                 
-                current_space.TilemapMember.SetTileFlags(current_space.LocalPlace, TileFlags.None);
-                current_space.TilemapMember.SetColor(current_space.LocalPlace, Color.green);
+                //current_space.TilemapMember.SetTileFlags(current_space.Location, TileFlags.None);
+                //current_space.TilemapMember.SetColor(current_space.Location, Color.green);
             }
         }
         return can_reach;
     }
 
-    void breadth_add_to_queue(Queue<(TileData, int)> q, Vector3Int p, int c)
+    void breadth_add_to_queue(Queue<(TileData, int)> q, Vector3 p, int c)
     {
         TileData tile = get_data(p);
         if(tile != null && !tile.Selectable && c <= Move)

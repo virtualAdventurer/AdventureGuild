@@ -7,8 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileData
 {
     //Possible needed for adding script into Tiles
-    public Vector3Int LocalPlace {get; set;}
-    public Vector3 WorldLocation {get; set;}
+    public Vector3 Location {get; set;}
     public Tilemap TilemapMember {get; set;}
 
     //Original data for each tile
