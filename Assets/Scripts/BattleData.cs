@@ -165,7 +165,8 @@ public class BattleData : MonoBehaviour
         {
             player_active = false;
 
-            player.transform.position = new Vector3(player_spaces[space_index].Item1.WorldLocation.x + 0.5f, player_spaces[space_index].Item1.WorldLocation.y + 0.5f, 0);
+            player.transform.position = new Vector3(selector.X + 0.5f, selector.Y + 0.05f, 0);
+            selector.gameObject.SetActive(false);
         }
     }
 
