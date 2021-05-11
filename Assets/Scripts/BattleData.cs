@@ -13,9 +13,12 @@ public class BattleData : MonoBehaviour
     public SelectorData selector;
 
     public Tilemap Ground;
-    public Dictionary<Vector3, TileData> tiles;
+    //public Dictionary<Vector3, TileStats> tiles;
 
-    public List<TileData> tile_data;
+    public TileStats[,] map;
+    public TileBase grass;
+
+    public List<TileStats> tile_data;
 
     //flag used to determine if buttons are ready to be used.
     private bool player_active = false;
@@ -31,10 +34,10 @@ public class BattleData : MonoBehaviour
             Destroy(gameObject);
         }
 
-        GetTiles();
+        //GetTiles();
     }
 
-    private void GetTiles()
+    /*private void GetTiles()
     {
         tiles = new Dictionary<Vector3, TileData>();
         tile_data = new List<TileData>();
@@ -53,19 +56,40 @@ public class BattleData : MonoBehaviour
             tiles.Add(tile.Location, tile);
             tile_data.Add(tile);
         }
-    }
+    }*/
+
+
 
 
     void Start()
     {
-        player_active = false;
+        /*player_active = false;
 
         player.breadth_first_search();
 
         
         selector.gameObject.SetActive(true);
         selector.transform.position = tiles[selector.getPosition()].Location;
-        player_active = true;
+        player_active = true;*/
+
+        map = new TileStats[2, 2];
+
+        map[0,0] = new TileStats();
+        map[0,0].TilemapMember = Ground;
+        map[0,0].TilemapMember.SetTile(new Vector3Int(0, 0, 0), grass);
+
+        map[0,1] = new TileStats();
+        map[0,1].TilemapMember = Ground;
+        map[0,1].TilemapMember.SetTile(new Vector3Int(0, 1, 0), grass);
+
+        map[1,0] = new TileStats();
+        map[1,0].TilemapMember = Ground;
+        map[1,0].TilemapMember.SetTile(new Vector3Int(1, 0, 0), grass);
+
+        map[1,1] = new TileStats();
+        map[1,1].TilemapMember = Ground;
+        map[1,1].TilemapMember.SetTile(new Vector3Int(1, 1, 0), grass);
+
     }
 
     public void OnUp()
@@ -92,7 +116,7 @@ public class BattleData : MonoBehaviour
     {
         if(player_active)
         {
-            player_active = false;
+            /*player_active = false;
 
             if(tiles[selector.getPosition()].Selectable)
             {
@@ -102,7 +126,7 @@ public class BattleData : MonoBehaviour
             else
             {
                 player_active = true;
-            }
+            }*/
         }
     }
 
@@ -110,8 +134,8 @@ public class BattleData : MonoBehaviour
     {
         if(player_active)
         {
-            player_active = false;
-            TileData tile;
+            /*player_active = false;
+            TileStats tile;
             Vector3 position = selector.getPosition();
             position.x += x;
             position.y += y;
@@ -122,7 +146,7 @@ public class BattleData : MonoBehaviour
                 selector.Y += y;
                 selector.transform.position = tile.Location;
             }
-            player_active = true;
+            player_active = true;*/
         }
     }
 

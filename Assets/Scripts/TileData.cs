@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-public class TileData
+public class TileStats
 {
     //Possible needed for adding script into Tiles
     public Vector3 Location {get; set;}
-    public Tilemap TilemapMember {get; set;}
+    public Tilemap TilemapMember {get; set;} 
 
     //Original data for each tile
     //public bool Blocked {get; set; }

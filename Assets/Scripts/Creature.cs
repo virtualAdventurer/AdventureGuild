@@ -12,18 +12,19 @@ public class Creature : MonoBehaviour
         
     }
 
-    TileData get_data(Vector3 p)
+    TileStats get_data(Vector3 p)
     {
-        var tiles = BattleData.instance.tiles;
-        TileData tile;
-        if(!tiles.TryGetValue(p, out tile))
+        //var tiles = BattleData.instance.tiles;
+        TileStats tile;
+        /*if(!tiles.TryGetValue(p, out tile))
         {
             tile = null;
-        }
+        }*/
+        tile = null;
         return tile;
     }
 
-    TileData getSpace()
+    TileStats getSpace()
     {
         Vector3 point = transform.position;
         var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
@@ -31,20 +32,20 @@ public class Creature : MonoBehaviour
     }
 
 
-    public List<(TileData, int)> breadth_first_search()
+    public List<(TileStats, int)> breadth_first_search()
     {
-        TileData space = getSpace();
+        TileStats space = getSpace();
 
-        Queue<(TileData, int)> need_to_visit = new Queue<(TileData, int)>();
-        List<(TileData, int)> can_reach = new List<(TileData, int)>();
+        Queue<(TileStats, int)> need_to_visit = new Queue<(TileStats, int)>();
+        List<(TileStats, int)> can_reach = new List<(TileStats, int)>();
         need_to_visit.Enqueue((space, 0));
         space.Selectable = true;
 
         while(need_to_visit.Count > 0)
         {
-            (TileData,  int) temp = need_to_visit.Dequeue();
+            (TileStats,  int) temp = need_to_visit.Dequeue();
 
-            TileData current_space = temp.Item1;
+            TileStats current_space = temp.Item1;
             int current_cost = temp.Item2;
 
             var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
@@ -70,9 +71,9 @@ public class Creature : MonoBehaviour
         return can_reach;
     }
 
-    void breadth_add_to_queue(Queue<(TileData, int)> q, Vector3 p, int c)
+    void breadth_add_to_queue(Queue<(TileStats, int)> q, Vector3 p, int c)
     {
-        TileData tile = get_data(p);
+        TileStats tile = get_data(p);
         if(tile != null && !tile.Selectable && c <= Move)
         {
             q.Enqueue((tile, c));
