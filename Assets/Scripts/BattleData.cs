@@ -23,6 +23,9 @@ public class BattleData : MonoBehaviour
     //flag used to determine if buttons are ready to be used.
     private bool player_active = false;
 
+    public int mapWidth;
+    public int mapHeight;
+
     private void Awake()
     {
         if (instance == null)
@@ -72,23 +75,17 @@ public class BattleData : MonoBehaviour
         selector.transform.position = tiles[selector.getPosition()].Location;
         player_active = true;*/
 
-        map = new TileStats[2, 2];
+        map = new TileStats[mapWidth, mapHeight];
 
-        map[0,0] = new TileStats();
-        map[0,0].TilemapMember = Ground;
-        map[0,0].TilemapMember.SetTile(new Vector3Int(0, 0, 0), grass);
-
-        map[0,1] = new TileStats();
-        map[0,1].TilemapMember = Ground;
-        map[0,1].TilemapMember.SetTile(new Vector3Int(0, 1, 0), grass);
-
-        map[1,0] = new TileStats();
-        map[1,0].TilemapMember = Ground;
-        map[1,0].TilemapMember.SetTile(new Vector3Int(1, 0, 0), grass);
-
-        map[1,1] = new TileStats();
-        map[1,1].TilemapMember = Ground;
-        map[1,1].TilemapMember.SetTile(new Vector3Int(1, 1, 0), grass);
+        for(int i = 0; i < mapWidth; i++)
+        {
+            for(int t = 0; t < mapHeight; t++)
+            {
+                map[i, t] = new TileStats();
+                map[i, t].TilemapMember = Ground;
+                map[i, t].TilemapMember.SetTile(new Vector3Int(i, t, 0), grass);
+            }
+        }
 
     }
 
