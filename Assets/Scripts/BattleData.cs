@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 //using System.Xml.Serialization;
 //using System.IO;
 
@@ -17,14 +18,22 @@ public class BattleData : MonoBehaviour
 
     public TileStats[,] map;
     public TileBase grass;
-
-    public List<TileStats> tile_data;
+    //public Canvas screen;
 
     //flag used to determine if buttons are ready to be used.
     private bool player_active = false;
 
     public int mapWidth;
     public int mapHeight;
+
+
+    //Testing with UI
+    GameObject myGO;
+    GameObject myText;
+    Canvas myCanvas;
+    Text text;
+    RectTransform rectTransform;
+    public Font testFont;
 
     private void Awake()
     {
@@ -98,6 +107,31 @@ public class BattleData : MonoBehaviour
         selector.Y = player.currentSpace.y;
         //Debug.Log("after");
         player_active = true;
+
+        // Canvas
+        myGO = new GameObject();
+        myGO.name = "TestCanvas";
+        myGO.AddComponent<Canvas>();
+
+        myCanvas = myGO.GetComponent<Canvas>();
+        myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        myGO.AddComponent<CanvasScaler>();
+        myGO.AddComponent<GraphicRaycaster>();
+
+        // Text
+        myText = new GameObject();
+        myText.transform.parent = myGO.transform;
+        myText.name = "wibble";
+
+        text = myText.AddComponent<Text>();
+        text.font = testFont;//(Font)Resources.Load("MyFont");
+        text.text = "woblle";
+        text.fontSize = 50;
+
+        // Text position
+        rectTransform = text.GetComponent<RectTransform>();
+        rectTransform.localPosition = new Vector3(0, 0, 0);
+        rectTransform.sizeDelta = new Vector2(400, 200);
     }
 
     public void OnUp()
