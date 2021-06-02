@@ -81,11 +81,17 @@ public class BattleData : MonoBehaviour
         {
             for(int t = 0; t < mapHeight; t++)
             {
+                Vector3Int position = new Vector3Int(i, t, 0);
                 map[i, t] = new TileStats();
                 map[i, t].TilemapMember = Ground;
-                map[i, t].TilemapMember.SetTile(new Vector3Int(i, t, 0), grass);
+                map[i, t].TilemapMember.SetTile(position, grass);
+                map[i, t].Location = position;
+                map[i, t].x = i;
+                map[i, t].y = t;
             }
         }
+
+        player.PlayerBoot();
 
     }
 

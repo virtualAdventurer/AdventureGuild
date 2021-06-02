@@ -6,13 +6,31 @@ using UnityEngine.Tilemaps;
 public class Creature : MonoBehaviour
 {
     public int Move;
+
+    public int characterX;
+    public int characterY;
+
+    private TileStats currentSpace;
  
     void Start()
     {
         
     }
 
-    TileStats get_data(Vector3 p)
+    public void PlayerBoot()
+    {
+        //place character into correct positon?
+        currentSpace = BattleData.instance.map[characterX, characterY];
+        transform.position = currentSpace.Location;
+        var dummyList = breadth_first_search();
+        foreach(var item in dummyList)
+        {
+            item.Item1.TilemapMember.SetTileFlags(item.Item1.Location, TileFlags.None);
+            item.Item1.TilemapMember.SetColor(item.Item1.Location, Color.green);
+        }
+    }
+
+    TileStats get_data(int x, int y)
     {
         //var tiles = BattleData.instance.tiles;
         TileStats tile;
@@ -20,15 +38,15 @@ public class Creature : MonoBehaviour
         {
             tile = null;
         }*/
-        tile = null;
+        tile = BattleData.instance.map[x, y];
         return tile;
     }
 
     TileStats getSpace()
     {
-        Vector3 point = transform.position;
-        var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
-        return get_data(worldPoint);
+        //Vector3 point = transform.position;
+        //var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
+        return currentSpace;
     }
 
 
@@ -48,17 +66,17 @@ public class Creature : MonoBehaviour
             TileStats current_space = temp.Item1;
             int current_cost = temp.Item2;
 
-            var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
-            breadth_add_to_queue(need_to_visit, up, current_cost + 1);
+            //var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
+            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y + 1), current_cost + 1);
         
-            var left = new Vector3(current_space.Location.x - 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, left, current_cost + 1);
+            //var left = new Vector3(current_space.Location.x - 1, current_space.Location.y, 0);
+            breadth_add_to_queue(need_to_visit, (current_space.x - 1, current_space.y), current_cost + 1);
 
-            var right = new Vector3(current_space.Location.x + 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, right, current_cost + 1);
+            //var right = new Vector3(current_space.Location.x + 1, current_space.Location.y, 0);
+            breadth_add_to_queue(need_to_visit, (current_space.x + 1, current_space.y), current_cost + 1);
 
-            var down = new Vector3(current_space.Location.x, current_space.Location.y - 1, 0);
-            breadth_add_to_queue(need_to_visit, down, current_cost + 1);
+            //var down = new Vector3(current_space.Location.x, current_space.Location.y - 1, 0);
+            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y - 1), current_cost + 1);
 
             if(current_cost <= Move)
             {
@@ -71,9 +89,9 @@ public class Creature : MonoBehaviour
         return can_reach;
     }
 
-    void breadth_add_to_queue(Queue<(TileStats, int)> q, Vector3 p, int c)
+    void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c)
     {
-        TileStats tile = get_data(p);
+        TileStats tile = get_data(pos.Item1, pos.Item2);
         if(tile != null && !tile.Selectable && c <= Move)
         {
             q.Enqueue((tile, c));
