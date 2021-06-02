@@ -20,6 +20,4 @@ public class TileStats
 
     //Data for breadth first search
     public bool Selectable {get; set;}
-    
-
 }

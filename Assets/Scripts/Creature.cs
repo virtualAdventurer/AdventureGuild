@@ -10,7 +10,7 @@ public class Creature : MonoBehaviour
     public int characterX;
     public int characterY;
 
-    private TileStats currentSpace;
+    public TileStats currentSpace;
  
     void Start()
     {
@@ -28,6 +28,7 @@ public class Creature : MonoBehaviour
             item.Item1.TilemapMember.SetTileFlags(item.Item1.Location, TileFlags.None);
             item.Item1.TilemapMember.SetColor(item.Item1.Location, Color.green);
         }
+        
     }
 
     TileStats get_data(int x, int y)

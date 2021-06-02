@@ -7,8 +7,8 @@ public class SelectorData : MonoBehaviour
     public int X;
     public int Y;
 
-    public Vector3 getPosition()
+    /*public Vector3 getPosition()
     {
         return new Vector3(X, Y, 0);
-    }
+    }*/
 }

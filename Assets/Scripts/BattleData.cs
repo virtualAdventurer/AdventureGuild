@@ -92,7 +92,12 @@ public class BattleData : MonoBehaviour
         }
 
         player.PlayerBoot();
-
+        selector.gameObject.SetActive(true);
+        selector.transform.position = player.currentSpace.Location;
+        selector.X = player.currentSpace.x;
+        selector.Y = player.currentSpace.y;
+        //Debug.Log("after");
+        player_active = true;
     }
 
     public void OnUp()
@@ -119,17 +124,17 @@ public class BattleData : MonoBehaviour
     {
         if(player_active)
         {
-            /*player_active = false;
+            player_active = false;
 
-            if(tiles[selector.getPosition()].Selectable)
+            if(map[selector.X, selector.Y].Selectable)
             {
-                player.transform.position = tiles[selector.getPosition()].Location;
+                player.transform.position = map[selector.X, selector.Y].Location;
                 selector.gameObject.SetActive(false);
             }
             else
             {
                 player_active = true;
-            }*/
+            }
         }
     }
 
@@ -137,8 +142,8 @@ public class BattleData : MonoBehaviour
     {
         if(player_active)
         {
-            /*player_active = false;
-            TileStats tile;
+            player_active = false;
+            /*TileStats tile;
             Vector3 position = selector.getPosition();
             position.x += x;
             position.y += y;
@@ -148,8 +153,14 @@ public class BattleData : MonoBehaviour
                 selector.X += x;
                 selector.Y += y;
                 selector.transform.position = tile.Location;
-            }
-            player_active = true;*/
+            }*/
+            selector.X += x;
+            selector.Y += y;
+            selector.transform.position = map[selector.X, selector.Y].Location;
+            
+
+
+            player_active = true;
         }
     }
 
