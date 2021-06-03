@@ -28,11 +28,6 @@ public class BattleData : MonoBehaviour
 
 
     //Testing with UI
-    GameObject myGO;
-    GameObject myText;
-    Canvas myCanvas;
-    Text text;
-    RectTransform rectTransform;
     public Font testFont;
 
     private void Awake()
@@ -105,31 +100,32 @@ public class BattleData : MonoBehaviour
         selector.transform.position = player.currentSpace.Location;
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
-        //Debug.Log("after");
         player_active = true;
 
+        //GUI setup
+
         // Canvas
-        myGO = new GameObject();
+        var myGO = new GameObject();
         myGO.name = "TestCanvas";
         myGO.AddComponent<Canvas>();
 
-        myCanvas = myGO.GetComponent<Canvas>();
+        var myCanvas = myGO.GetComponent<Canvas>();
         myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         myGO.AddComponent<CanvasScaler>();
         myGO.AddComponent<GraphicRaycaster>();
 
         // Text
-        myText = new GameObject();
+        var myText = new GameObject();
         myText.transform.parent = myGO.transform;
         myText.name = "wibble";
 
-        text = myText.AddComponent<Text>();
+        var text = myText.AddComponent<Text>();
         text.font = testFont;//(Font)Resources.Load("MyFont");
         text.text = "woblle";
         text.fontSize = 50;
 
         // Text position
-        rectTransform = text.GetComponent<RectTransform>();
+        var rectTransform = text.GetComponent<RectTransform>();
         rectTransform.localPosition = new Vector3(0, 0, 0);
         rectTransform.sizeDelta = new Vector2(400, 200);
     }
