@@ -41,30 +41,7 @@ public class BattleData : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //GetTiles();
     }
-
-    /*private void GetTiles()
-    {
-        tiles = new Dictionary<Vector3, TileData>();
-        tile_data = new List<TileData>();
-        foreach(Vector3Int pos in Ground.cellBounds.allPositionsWithin)
-        {
-            var localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-
-            if(!Ground.HasTile(localPlace)) continue;
-            var tile = new TileData
-            {
-                Location = Ground.CellToWorld(localPlace),
-                TilemapMember = Ground,
-                Selectable = false
-            };
-
-            tiles.Add(tile.Location, tile);
-            tile_data.Add(tile);
-        }
-    }*/
 
 
 
@@ -101,10 +78,7 @@ public class BattleData : MonoBehaviour
         selector.transform.position = player.currentSpace.Location;
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
-        player_active = true;        
-        
-
-        //moveButton.text = "Move";
+        player_active = true;
     }
 
     public void OnUp()
@@ -150,17 +124,6 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-            /*TileStats tile;
-            Vector3 position = selector.getPosition();
-            position.x += x;
-            position.y += y;
-
-            if(tiles.TryGetValue(position, out tile))
-            {
-                selector.X += x;
-                selector.Y += y;
-                selector.transform.position = tile.Location;
-            }*/
             selector.X += x;
             selector.Y += y;
             selector.transform.position = map[selector.X, selector.Y].Location;
