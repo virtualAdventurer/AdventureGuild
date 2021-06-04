@@ -21,9 +21,13 @@ public class Creature : MonoBehaviour
     {
         //place character into correct positon?
         currentSpace = BattleData.instance.map[characterX, characterY];
-        transform.position = currentSpace.Location;
-        
-        
+        transform.position = currentSpace.Location;        
+    }
+
+    public void MoveCharacter(TileStats space)
+    {
+        transform.position =  space.Location;
+        currentSpace = space;
     }
 
     TileStats get_data(int x, int y)
@@ -85,7 +89,7 @@ public class Creature : MonoBehaviour
         return can_reach;
     }
 
-    void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c)
+    private void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c)
     {
         TileStats tile = get_data(pos.Item1, pos.Item2);
         if(tile != null && !tile.Selectable && c <= Move)

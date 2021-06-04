@@ -127,7 +127,7 @@ public class BattleData : MonoBehaviour
 
             if(map[selector.X, selector.Y].Selectable)
             {
-                player.transform.position = map[selector.X, selector.Y].Location;
+                player.MoveCharacter(map[selector.X, selector.Y]);
                 selector.gameObject.SetActive(false);
             }
             else
@@ -145,9 +145,6 @@ public class BattleData : MonoBehaviour
             selector.X += x;
             selector.Y += y;
             selector.transform.position = map[selector.X, selector.Y].Location;
-            
-
-
             player_active = true;
         }
     }
