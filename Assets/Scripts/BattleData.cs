@@ -11,6 +11,7 @@ public class BattleData : MonoBehaviour
     //Bad Singleton Pattern?
     public static BattleData instance;
     public Creature player;
+    public Creature enemy;
     public SelectorData selector;
 
     public Tilemap Ground;
@@ -74,6 +75,7 @@ public class BattleData : MonoBehaviour
         }
 
         player.PlayerBoot();
+        enemy.PlayerBoot();
     }
 
     public void MoveAction()
