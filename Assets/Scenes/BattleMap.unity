@@ -373,7 +373,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Move
+
+'
 --- !u!222 &114913995
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -462,8 +464,6 @@ MonoBehaviour:
   grass: {fileID: 11400000, guid: ccf3ee570cd443f4b806da2fc3be283a, type: 2}
   mapWidth: 38
   mapHeight: 20
-  testFont: {fileID: 12800000, guid: c958a87d75bb1be4b84a3939cf11d034, type: 3}
-  canvas: {fileID: 1467841826}
 --- !u!4 &598532325
 Transform:
   m_ObjectHideFlags: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696662453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -762,7 +762,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Attack
 --- !u!222 &963064091
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -954,7 +954,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1531643067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 598532324}
+        m_TargetAssemblyTypeName: BattleData, Assembly-CSharp
+        m_MethodName: AttackAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1531643067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,7 +1169,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1816504766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 598532324}
+        m_TargetAssemblyTypeName: BattleData, Assembly-CSharp
+        m_MethodName: MoveAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1816504766
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,8 +28,8 @@ public class BattleData : MonoBehaviour
 
 
     //Testing with UI
-    public Font testFont;
-    public Canvas canvas;
+    //public Font testFont;
+    //public Canvas canvas;
 
     private void Awake()
     {
@@ -74,11 +74,27 @@ public class BattleData : MonoBehaviour
         }
 
         player.PlayerBoot();
+    }
+
+    public void MoveAction()
+    {
+        var dummyList = player.breadth_first_search();
+        foreach(var item in dummyList)
+        {
+            item.Item1.TilemapMember.SetTileFlags(item.Item1.Location, TileFlags.None);
+            item.Item1.TilemapMember.SetColor(item.Item1.Location, Color.green);
+        }
+
         selector.gameObject.SetActive(true);
         selector.transform.position = player.currentSpace.Location;
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
         player_active = true;
+    }
+
+    public void AttackAction()
+    {
+        Debug.Log("attacl");
     }
 
     public void OnUp()

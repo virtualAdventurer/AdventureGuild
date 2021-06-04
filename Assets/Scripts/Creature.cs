@@ -22,12 +22,7 @@ public class Creature : MonoBehaviour
         //place character into correct positon?
         currentSpace = BattleData.instance.map[characterX, characterY];
         transform.position = currentSpace.Location;
-        var dummyList = breadth_first_search();
-        foreach(var item in dummyList)
-        {
-            item.Item1.TilemapMember.SetTileFlags(item.Item1.Location, TileFlags.None);
-            item.Item1.TilemapMember.SetColor(item.Item1.Location, Color.green);
-        }
+        
         
     }
 
