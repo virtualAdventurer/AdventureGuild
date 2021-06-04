@@ -32,13 +32,11 @@ public class Creature : MonoBehaviour
 
     TileStats get_data(int x, int y)
     {
-        //var tiles = BattleData.instance.tiles;
-        TileStats tile;
-        /*if(!tiles.TryGetValue(p, out tile))
+        TileStats tile = null;
+        if(0 <= y && y < BattleData.instance.mapHeight && 0 <= x && x < BattleData.instance.mapWidth)
         {
-            tile = null;
-        }*/
-        tile = BattleData.instance.map[x, y];
+            tile = BattleData.instance.map[x, y];
+        }
         return tile;
     }
 

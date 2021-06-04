@@ -142,8 +142,10 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-            selector.X += x;
-            selector.Y += y;
+            if(selector.X + x >= 0 && selector.X + x < mapWidth)
+                selector.X += x;
+            if(selector.Y + y >= 0 && selector.Y + y < mapHeight)
+                selector.Y += y;
             selector.transform.position = map[selector.X, selector.Y].Location;
             player_active = true;
         }
