@@ -11,6 +11,7 @@ public class TileStats
     public Tilemap TilemapMember {get; set;} 
     public int x {get; set;}
     public int y {get; set;}
+    public GameObject indicator {get; set;}
 
     //Original data for each tile
     //public bool Blocked {get; set; }

@@ -26,7 +26,9 @@ public class BattleData : MonoBehaviour
 
     public int mapWidth;
     public int mapHeight;
+    public Sprite mySquare;
 
+    private List<(TileStats, int)> range;
 
     //Testing with UI
     //public Font testFont;
@@ -80,11 +82,16 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
-        var dummyList = player.breadth_first_search();
-        foreach(var item in dummyList)
+        range = player.breadth_first_search();
+        foreach(var item in range)
         {
-            item.Item1.TilemapMember.SetTileFlags(item.Item1.Location, TileFlags.None);
-            item.Item1.TilemapMember.SetColor(item.Item1.Location, Color.green);
+            TileStats tile = item.Item1;
+            GameObject square = new GameObject();
+            var sprite = square.AddComponent<SpriteRenderer>();
+            sprite.sprite = mySquare;
+            square.transform.position = tile.Location;
+            sprite.sortingOrder = 1;
+            tile.indicator = square;
         }
 
         selector.gameObject.SetActive(true);
@@ -129,6 +136,12 @@ public class BattleData : MonoBehaviour
             {
                 player.MoveCharacter(map[selector.X, selector.Y]);
                 selector.gameObject.SetActive(false);
+                foreach(var item in range)
+                {
+                    item.Item1.Selectable = false;
+                    Destroy(item.Item1.indicator);
+                    item.Item1.indicator = null;
+                }
             }
             else
             {
