@@ -563,7 +563,8 @@ MonoBehaviour:
   grass: {fileID: 11400000, guid: ccf3ee570cd443f4b806da2fc3be283a, type: 2}
   mapWidth: 38
   mapHeight: 20
-  mySquare: {fileID: 21300000, guid: a00ad0ecd3d8c5e40874f1572007a3bf, type: 3}
+  MoveSquare: {fileID: 21300000, guid: a00ad0ecd3d8c5e40874f1572007a3bf, type: 3}
+  AttackSquare: {fileID: 21300000, guid: 77f148b3256b5364d85c1ce409b747a1, type: 3}
 --- !u!4 &598532325
 Transform:
   m_ObjectHideFlags: 0

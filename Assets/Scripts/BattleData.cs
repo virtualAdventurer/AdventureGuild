@@ -26,7 +26,8 @@ public class BattleData : MonoBehaviour
 
     public int mapWidth;
     public int mapHeight;
-    public Sprite mySquare;
+    public Sprite MoveSquare;
+    public Sprite AttackSquare;
 
     private List<(TileStats, int)> range;
 
@@ -89,7 +90,7 @@ public class BattleData : MonoBehaviour
             TileStats tile = item.Item1;
             GameObject square = new GameObject();
             var sprite = square.AddComponent<SpriteRenderer>();
-            sprite.sprite = mySquare;
+            sprite.sprite = MoveSquare;
             square.transform.position = tile.Location;
             sprite.sortingOrder = 1;
             tile.indicator = square;
@@ -110,7 +111,7 @@ public class BattleData : MonoBehaviour
             TileStats tile = item.Item1;
             GameObject square = new GameObject();
             var sprite = square.AddComponent<SpriteRenderer>();
-            sprite.sprite = mySquare;
+            sprite.sprite = AttackSquare;
             square.transform.position = tile.Location;
             sprite.sortingOrder = 1;
             tile.indicator = square;
