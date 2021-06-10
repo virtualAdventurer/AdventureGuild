@@ -48,7 +48,7 @@ public class Creature : MonoBehaviour
     }
 
 
-    public List<(TileStats, int)> breadth_first_search()
+    public List<(TileStats, int)> breadth_first_search(int range)
     {
         TileStats space = getSpace();
 
@@ -65,18 +65,18 @@ public class Creature : MonoBehaviour
             int current_cost = temp.Item2;
 
             //var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y + 1), current_cost + 1);
+            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y + 1), current_cost + 1, range);
         
             //var left = new Vector3(current_space.Location.x - 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x - 1, current_space.y), current_cost + 1);
+            breadth_add_to_queue(need_to_visit, (current_space.x - 1, current_space.y), current_cost + 1, range);
 
             //var right = new Vector3(current_space.Location.x + 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x + 1, current_space.y), current_cost + 1);
+            breadth_add_to_queue(need_to_visit, (current_space.x + 1, current_space.y), current_cost + 1, range);
 
             //var down = new Vector3(current_space.Location.x, current_space.Location.y - 1, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y - 1), current_cost + 1);
+            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y - 1), current_cost + 1, range);
 
-            if(current_cost <= Move)
+            if(current_cost <= range)
             {
                 can_reach.Add((current_space, current_cost));
                 
@@ -87,10 +87,10 @@ public class Creature : MonoBehaviour
         return can_reach;
     }
 
-    private void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c)
+    private void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c, int r)
     {
         TileStats tile = get_data(pos.Item1, pos.Item2);
-        if(tile != null && !tile.Selectable && c <= Move)
+        if(tile != null && !tile.Selectable && c <= r)
         {
             q.Enqueue((tile, c));
             tile.Selectable = true;

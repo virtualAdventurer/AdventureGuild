@@ -82,7 +82,8 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
-        range = player.breadth_first_search();
+        
+        range = player.breadth_first_search(player.Move);
         foreach(var item in range)
         {
             TileStats tile = item.Item1;
@@ -103,7 +104,23 @@ public class BattleData : MonoBehaviour
 
     public void AttackAction()
     {
-        Debug.Log("attacl");
+        range = player.breadth_first_search(1);
+        foreach(var item in range)
+        {
+            TileStats tile = item.Item1;
+            GameObject square = new GameObject();
+            var sprite = square.AddComponent<SpriteRenderer>();
+            sprite.sprite = mySquare;
+            square.transform.position = tile.Location;
+            sprite.sortingOrder = 1;
+            tile.indicator = square;
+        }
+
+        selector.gameObject.SetActive(true);
+        selector.transform.position = player.currentSpace.Location;
+        selector.X = player.currentSpace.x;
+        selector.Y = player.currentSpace.y;
+        player_active = true;
     }
 
     public void OnUp()
