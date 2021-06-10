@@ -31,6 +31,9 @@ public class BattleData : MonoBehaviour
 
     private List<(TileStats, int)> range;
 
+    private delegate void action();
+    private action preformAction;
+
     //Testing with UI
     //public Font testFont;
     //public Canvas canvas;
@@ -83,7 +86,6 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
-        
         range = player.breadth_first_search(player.Move);
         foreach(var item in range)
         {
@@ -100,6 +102,7 @@ public class BattleData : MonoBehaviour
         selector.transform.position = player.currentSpace.Location;
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
+        preformAction = PreformMove;
         player_active = true;
     }
 
@@ -121,6 +124,7 @@ public class BattleData : MonoBehaviour
         selector.transform.position = player.currentSpace.Location;
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
+        preformAction = PrefomAttack;
         player_active = true;
     }
 
@@ -149,10 +153,9 @@ public class BattleData : MonoBehaviour
         if(player_active)
         {
             player_active = false;
-
+            preformAction();
             if(map[selector.X, selector.Y].Selectable)
             {
-                player.MoveCharacter(map[selector.X, selector.Y]);
                 selector.gameObject.SetActive(false);
                 foreach(var item in range)
                 {
@@ -180,6 +183,16 @@ public class BattleData : MonoBehaviour
             selector.transform.position = map[selector.X, selector.Y].Location;
             player_active = true;
         }
+    }
+
+    private void PreformMove()
+    {
+        player.MoveCharacter(map[selector.X, selector.Y]);
+    }
+
+    private void PrefomAttack()
+    {
+        Debug.Log("Attack");
     }
 
 }
