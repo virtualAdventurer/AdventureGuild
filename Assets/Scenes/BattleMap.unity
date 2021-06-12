@@ -461,6 +461,10 @@ MonoBehaviour:
   Move: 3
   characterX: 12
   characterY: 3
+  accuracy: 0
+  dodge: 0
+  attack: 0
+  defence: 0
 --- !u!212 &226180859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -710,6 +714,10 @@ MonoBehaviour:
   Move: 3
   characterX: 9
   characterY: 10
+  accuracy: 0
+  dodge: 0
+  attack: 0
+  defence: 0
 --- !u!1 &949445909
 GameObject:
   m_ObjectHideFlags: 0
