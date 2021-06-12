@@ -19,7 +19,7 @@ public class BattleData : MonoBehaviour
 
     public TileStats[,] map;
     public TileBase grass;
-    //public Canvas screen;
+    public Canvas screen;
 
     //flag used to determine if buttons are ready to be used.
     private bool player_active = false;
@@ -28,6 +28,7 @@ public class BattleData : MonoBehaviour
     public int mapHeight;
     public Sprite MoveSquare;
     public Sprite AttackSquare;
+    public Font font;
 
     private List<(TileStats, int)> range;
 
@@ -86,7 +87,59 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
-        range = player.breadth_first_search(player.Move);
+        // Text
+        var myText = new GameObject();
+        myText.transform.parent = screen.transform;
+        myText.name = "Button";
+
+        /*var text = myText.AddComponent<Text>();
+        text.font = font;
+        text.text = "wobble";
+        text.fontSize = 100;*/
+        var image = myText.AddComponent<Image>();
+        image.sprite = MoveSquare;
+
+        var button = myText.AddComponent<Button>();
+
+        //Debug.Log(Camera.main.ViewportToScreenPoint(player.transform.position));
+        //Debug.Log(Camera.main.WorldToViewportPoint(player.transform.position));
+        //Debug.Log(Camera.main.WorldToScreenPoint(player.transform.position));
+
+        
+        
+        //Debug.Log();
+        //Debug.Log(Camera.main.);
+        
+
+        // Text position
+        var rectTransform = button.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2();
+        //rectTransform.sizeDelta = new Vector2(64, 64);
+        //rectTransform.localPosition = new Vector3(player.currentSpace.x, player.currentSpace.y, 0);
+        Debug.Log(player.transform.position);
+        var step1 = Camera.main.WorldToViewportPoint(player.transform.position);
+        Debug.Log(step1);
+        var step2 = screen.renderingDisplaySize;
+        Debug.Log(step2);
+        var step3 = step1 * step2;
+        Debug.Log(step3);
+        var step4 = step2 / 2;
+        Debug.Log(step4);
+        var step5 = step3 - step4;
+        Debug.Log(step5);
+        rectTransform.localPosition = step5;
+        
+        /*var step2 = step1 - new Vector3(18, 0.5f, 0);
+        Debug.Log(step2);
+        var step3 = rectTransform.sizeDelta;
+        Debug.Log(step3);
+        var step4 = Vector3.Scale(step2, step3);
+        rectTransform.localPosition = step4;
+        Debug.Log(step4);*/
+
+        
+        
+        /*range = player.breadth_first_search(player.Move);
         foreach(var item in range)
         {
             TileStats tile = item.Item1;
@@ -103,12 +156,12 @@ public class BattleData : MonoBehaviour
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
         preformAction = PreformMove;
-        player_active = true;
+        player_active = true;*/
     }
 
     public void AttackAction()
     {
-        range = player.breadth_first_search(1);
+        /*range = player.breadth_first_search(1);
         foreach(var item in range)
         {
             TileStats tile = item.Item1;
@@ -125,7 +178,7 @@ public class BattleData : MonoBehaviour
         selector.X = player.currentSpace.x;
         selector.Y = player.currentSpace.y;
         preformAction = PrefomAttack;
-        player_active = true;
+        player_active = true; */
     }
 
     public void OnUp()

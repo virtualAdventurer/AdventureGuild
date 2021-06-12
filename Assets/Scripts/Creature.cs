@@ -11,6 +11,11 @@ public class Creature : MonoBehaviour
     public int characterY;
 
     public TileStats currentSpace;
+    //Battle Stats
+    public int accuracy;
+    public int dodge;
+    public int attack;
+    public int defence;
  
     void Start()
     {
@@ -95,5 +100,23 @@ public class Creature : MonoBehaviour
             q.Enqueue((tile, c));
             tile.Selectable = true;
         }
+    }
+
+    //Battle Stats
+    public int GetAttack()
+    {
+        return attack;
+    }
+    public int GetDefence()
+    {
+        return defence;
+    }
+    public int GetAccuracy()
+    {
+        return accuracy;
+    }
+    public int GetDodge()
+    {
+        return dodge;
     }
 }
