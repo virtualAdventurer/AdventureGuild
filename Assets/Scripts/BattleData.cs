@@ -104,29 +104,26 @@ public class BattleData : MonoBehaviour
         //Debug.Log(Camera.main.ViewportToScreenPoint(player.transform.position));
         //Debug.Log(Camera.main.WorldToViewportPoint(player.transform.position));
         //Debug.Log(Camera.main.WorldToScreenPoint(player.transform.position));
-
         
         
         //Debug.Log();
         //Debug.Log(Camera.main.);
+
+        //Debug.Log(size);
         
 
         // Text position
         var rectTransform = button.GetComponent<RectTransform>();
         rectTransform.pivot = new Vector2();
-        //rectTransform.sizeDelta = new Vector2(64, 64);
+        var size =  screen.renderingDisplaySize.y / 20;
+        rectTransform.sizeDelta = new Vector2(size, size);
+
         //rectTransform.localPosition = new Vector3(player.currentSpace.x, player.currentSpace.y, 0);
-        Debug.Log(player.transform.position);
         var step1 = Camera.main.WorldToViewportPoint(player.transform.position);
-        Debug.Log(step1);
         var step2 = screen.renderingDisplaySize;
-        Debug.Log(step2);
         var step3 = step1 * step2;
-        Debug.Log(step3);
         var step4 = step2 / 2;
-        Debug.Log(step4);
         var step5 = step3 - step4;
-        Debug.Log(step5);
         rectTransform.localPosition = step5;
         
         /*var step2 = step1 - new Vector3(18, 0.5f, 0);

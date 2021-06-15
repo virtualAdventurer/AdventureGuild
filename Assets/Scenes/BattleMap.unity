@@ -713,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Move: 3
   characterX: 9
-  characterY: 10
+  characterY: 9
   accuracy: 0
   dodge: 0
   attack: 0
