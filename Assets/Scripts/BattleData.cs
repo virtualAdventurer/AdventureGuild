@@ -21,7 +21,7 @@ public class BattleData : MonoBehaviour
     public TileBase grass;
     public Canvas screen;
 
-    //flag used to determine if buttons are ready to be used.
+    //flag used to determine if buttons are ready to be used. 
     private bool player_active = false;
 
     public int mapWidth;
@@ -56,15 +56,7 @@ public class BattleData : MonoBehaviour
 
     void Start()
     {
-        /*player_active = false;
-
-        player.breadth_first_search();
-
-        
-        selector.gameObject.SetActive(true);
-        selector.transform.position = tiles[selector.getPosition()].Location;
-        player_active = true;*/
-
+        //Temp map generator
         map = new TileStats[mapWidth, mapHeight];
 
         for(int i = 0; i < mapWidth; i++)
@@ -87,73 +79,11 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
-        // Text
-        var myText = new GameObject();
-        myText.transform.parent = screen.transform;
-        myText.name = "Button";
-
-        /*var text = myText.AddComponent<Text>();
-        text.font = font;
-        text.text = "wobble";
-        text.fontSize = 100;*/
-        var image = myText.AddComponent<Image>();
-        image.sprite = MoveSquare;
-
-        var button = myText.AddComponent<Button>();
-
-        //Debug.Log(Camera.main.ViewportToScreenPoint(player.transform.position));
-        //Debug.Log(Camera.main.WorldToViewportPoint(player.transform.position));
-        //Debug.Log(Camera.main.WorldToScreenPoint(player.transform.position));
-        
-        
-        //Debug.Log();
-        //Debug.Log(Camera.main.);
-
-        //Debug.Log(size);
-        
-
-        // Text position
-        var rectTransform = button.GetComponent<RectTransform>();
-        rectTransform.pivot = new Vector2();
-        var size =  screen.renderingDisplaySize.y / 20;
-        rectTransform.sizeDelta = new Vector2(size, size);
-
-        //rectTransform.localPosition = new Vector3(player.currentSpace.x, player.currentSpace.y, 0);
-        var step1 = Camera.main.WorldToViewportPoint(player.transform.position);
-        var step2 = screen.renderingDisplaySize;
-        var step3 = step1 * step2;
-        var step4 = step2 / 2;
-        var step5 = step3 - step4;
-        rectTransform.localPosition = step5;
-        
-        /*var step2 = step1 - new Vector3(18, 0.5f, 0);
-        Debug.Log(step2);
-        var step3 = rectTransform.sizeDelta;
-        Debug.Log(step3);
-        var step4 = Vector3.Scale(step2, step3);
-        rectTransform.localPosition = step4;
-        Debug.Log(step4);*/
-
-        
-        
-        /*range = player.breadth_first_search(player.Move);
-        foreach(var item in range)
+        var spaces = player.breadth_first_search(player.Move);
+        foreach(var space in spaces)
         {
-            TileStats tile = item.Item1;
-            GameObject square = new GameObject();
-            var sprite = square.AddComponent<SpriteRenderer>();
-            sprite.sprite = MoveSquare;
-            square.transform.position = tile.Location;
-            sprite.sortingOrder = 1;
-            tile.indicator = square;
+            SpaceButton(space.Item1);
         }
-
-        selector.gameObject.SetActive(true);
-        selector.transform.position = player.currentSpace.Location;
-        selector.X = player.currentSpace.x;
-        selector.Y = player.currentSpace.y;
-        preformAction = PreformMove;
-        player_active = true;*/
     }
 
     public void AttackAction()
@@ -243,6 +173,36 @@ public class BattleData : MonoBehaviour
     private void PrefomAttack()
     {
         Debug.Log("Attack");
+    }
+
+    private void SpaceButton(TileStats tile)
+    {
+        // Create Button Object
+        var buttonObject = new GameObject();
+        buttonObject.transform.parent = screen.transform;
+        buttonObject.name = "Button";
+
+        //Adding the image to the button.
+        var image = buttonObject.AddComponent<Image>();
+        image.sprite = MoveSquare;
+
+        //creating the button functionality
+        var button = buttonObject.AddComponent<Button>();
+        
+
+        //Create position and size component
+        var rectTransform = button.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2();
+
+        //Calculate size
+        var size =  screen.renderingDisplaySize.y / 20;
+        rectTransform.sizeDelta = new Vector2(size, size);
+
+        //calculate position
+        var postionOnScreen = Camera.main.WorldToViewportPoint(tile.Location);
+        var positionInPixels = postionOnScreen * screen.renderingDisplaySize;
+        var Offset = screen.renderingDisplaySize / 2;
+        rectTransform.localPosition = positionInPixels - Offset;
     }
 
 }
