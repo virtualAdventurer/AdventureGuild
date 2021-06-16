@@ -188,6 +188,7 @@ public class BattleData : MonoBehaviour
 
         //creating the button functionality
         var button = buttonObject.AddComponent<Button>();
+        //Find out how to clearly indicate button being selected without mouse
         
 
         //Create position and size component
