@@ -82,30 +82,14 @@ public class BattleData : MonoBehaviour
         var spaces = player.breadth_first_search(player.Move);
         foreach(var space in spaces)
         {
-            SpaceButton(space.Item1);
+            var button = SpaceButton(space.Item1);
+            button.onClick.AddListener(() => PreformMove(space.Item1.x, space.Item1.y));
         }
     }
 
     public void AttackAction()
     {
-        /*range = player.breadth_first_search(1);
-        foreach(var item in range)
-        {
-            TileStats tile = item.Item1;
-            GameObject square = new GameObject();
-            var sprite = square.AddComponent<SpriteRenderer>();
-            sprite.sprite = AttackSquare;
-            square.transform.position = tile.Location;
-            sprite.sortingOrder = 1;
-            tile.indicator = square;
-        }
-
-        selector.gameObject.SetActive(true);
-        selector.transform.position = player.currentSpace.Location;
-        selector.X = player.currentSpace.x;
-        selector.Y = player.currentSpace.y;
-        preformAction = PrefomAttack;
-        player_active = true; */
+        Debug.Log("Attack");
     }
 
     public void OnUp()
@@ -165,17 +149,17 @@ public class BattleData : MonoBehaviour
         }
     }
 
-    private void PreformMove()
+    private void PreformMove(int x, int y)
     {
-        player.MoveCharacter(map[selector.X, selector.Y]);
+        player.MoveCharacter(map[x, y]);
     }
 
     private void PrefomAttack()
     {
-        Debug.Log("Attack");
+        Debug.Log("Attack2");
     }
 
-    private void SpaceButton(TileStats tile)
+    private Button SpaceButton(TileStats tile)
     {
         // Create Button Object
         var buttonObject = new GameObject();
@@ -188,6 +172,7 @@ public class BattleData : MonoBehaviour
 
         //creating the button functionality
         var button = buttonObject.AddComponent<Button>();
+        
         //Find out how to clearly indicate button being selected without mouse
         
 
@@ -204,6 +189,8 @@ public class BattleData : MonoBehaviour
         var positionInPixels = postionOnScreen * screen.renderingDisplaySize;
         var Offset = screen.renderingDisplaySize / 2;
         rectTransform.localPosition = positionInPixels - Offset;
+
+        return button;
     }
 
 }
