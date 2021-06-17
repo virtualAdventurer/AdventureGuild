@@ -12,7 +12,7 @@ public class BattleData : MonoBehaviour
     public static BattleData instance;
     public Creature player;
     public Creature enemy;
-    public SelectorData selector;
+    //public SelectorData selector;
 
     public Tilemap Ground;
     //public Dictionary<Vector3, TileStats> tiles;
@@ -21,14 +21,10 @@ public class BattleData : MonoBehaviour
     public TileBase grass;
     public Canvas screen;
 
-    //flag used to determine if buttons are ready to be used. 
-    private bool player_active = false;
-
     public int mapWidth;
     public int mapHeight;
     public Sprite MoveSquare;
     public Sprite AttackSquare;
-    public Font font;
 
     private List<(TileStats, int)> range;
 
@@ -92,63 +88,6 @@ public class BattleData : MonoBehaviour
         Debug.Log("Attack");
     }
 
-    public void OnUp()
-    {
-        SpaceSelectHelper(0, 1);
-    }
-
-    public void OnDown()
-    {
-        SpaceSelectHelper(0, -1);
-    }
-
-    public void OnRight()
-    {
-        SpaceSelectHelper(1, 0);
-    }
-
-    public void OnLeft()
-    {
-        SpaceSelectHelper(-1, 0);
-    }
-
-    public void OnAccept()
-    {
-        if(player_active)
-        {
-            player_active = false;
-            preformAction();
-            if(map[selector.X, selector.Y].Selectable)
-            {
-                selector.gameObject.SetActive(false);
-                foreach(var item in range)
-                {
-                    item.Item1.Selectable = false;
-                    Destroy(item.Item1.indicator);
-                    item.Item1.indicator = null;
-                }
-            }
-            else
-            {
-                player_active = true;
-            }
-        }
-    }
-
-    private void SpaceSelectHelper(int x, int y)
-    {
-        if(player_active)
-        {
-            player_active = false;
-            if(selector.X + x >= 0 && selector.X + x < mapWidth)
-                selector.X += x;
-            if(selector.Y + y >= 0 && selector.Y + y < mapHeight)
-                selector.Y += y;
-            selector.transform.position = map[selector.X, selector.Y].Location;
-            player_active = true;
-        }
-    }
-
     private void PreformMove(int x, int y)
     {
         player.MoveCharacter(map[x, y]);
@@ -172,9 +111,6 @@ public class BattleData : MonoBehaviour
 
         //creating the button functionality
         var button = buttonObject.AddComponent<Button>();
-        
-        //Find out how to clearly indicate button being selected without mouse
-        
 
         //Create position and size component
         var rectTransform = button.GetComponent<RectTransform>();
