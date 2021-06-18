@@ -18,4 +18,9 @@ public class Action
     {
         act();
     }
+
+    public string getName()
+    {
+        return name;
+    }
 }

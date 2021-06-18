@@ -12,28 +12,17 @@ public class BattleData : MonoBehaviour
     public static BattleData instance;
     public Creature player;
     public Creature enemy;
-    //public SelectorData selector;
-
     public Tilemap Ground;
-    //public Dictionary<Vector3, TileStats> tiles;
-
     public TileStats[,] map;
     public TileBase grass;
     public Canvas screen;
-
     public int mapWidth;
     public int mapHeight;
     public Sprite MoveSquare;
     public Sprite AttackSquare;
+    public GameObject ActionButtonTemplate;
 
-    private List<(TileStats, int)> range;
-
-    private delegate void action();
-    private action preformAction;
-
-    //Testing with UI
-    //public Font testFont;
-    //public Canvas canvas;
+    private List<Action> actionList;
 
     private void Awake()
     {
@@ -46,9 +35,6 @@ public class BattleData : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
-
 
     void Start()
     {
@@ -69,8 +55,28 @@ public class BattleData : MonoBehaviour
             }
         }
 
+        //Place Creatures on the map
         player.PlayerBoot();
         enemy.PlayerBoot();
+
+        //Temp Action Generation
+        actionList = new List<Action>();
+        actionList.Add(new Action("Attack", AttackAction));
+        actionList.Add(new Action("Move", MoveAction));
+
+        //Create buttons for each action
+        for (int i = 0; i < actionList.Count; i++)
+        {
+            var action = actionList[i];
+
+            GameObject buttonObject = Instantiate(ActionButtonTemplate, screen.transform);
+            var button = buttonObject.GetComponent<Button>();
+            button.onClick.AddListener(action.preformAction);
+            var text = button.transform.GetChild(0).GetComponent<Text>();
+            text.text = action.getName();
+            var rectTransform = buttonObject.GetComponent<RectTransform>();
+            rectTransform.localPosition = new Vector2(0, i * rectTransform.sizeDelta.y);
+        }
     }
 
     public void MoveAction()
@@ -93,7 +99,7 @@ public class BattleData : MonoBehaviour
         player.MoveCharacter(map[x, y]);
     }
 
-    private void PrefomAttack()
+    private void PreformAttack()
     {
         Debug.Log("Attack2");
     }
