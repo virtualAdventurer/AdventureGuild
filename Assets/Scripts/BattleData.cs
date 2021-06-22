@@ -52,6 +52,7 @@ public class BattleData : MonoBehaviour
                 map[i, t].TilemapMember = Ground;
                 map[i, t].TilemapMember.SetTile(position, grass);
                 map[i, t].Location = position;
+                map[i, t].unit = null;
                 map[i, t].x = i;
                 map[i, t].y = t;
             }
@@ -86,7 +87,21 @@ public class BattleData : MonoBehaviour
 
     public void AttackAction()
     {
-        Debug.Log("Attack");
+        deleteButtons();
+        //Get attack spaces
+        var spaces = player.breadth_first_search(1);
+        //Generate Button for every enemy in range. (simplify to creature)
+        foreach(var space in spaces)
+        {
+            //Only put a button on the space if the space has an enemy
+            if(space.Item1.unit != null)
+            {
+                var button = SpaceButton(space.Item1);
+                button.onClick.AddListener(() => PreformAttack(player, space.Item1.unit));
+            }
+            space.Item1.Selectable = false;
+        }
+        //Give each button a function to preform the attack, with its target
     }
 
     private void PreformMove(int x, int y)
@@ -96,9 +111,11 @@ public class BattleData : MonoBehaviour
         generateActions();
     }
 
-    private void PreformAttack()
+    private void PreformAttack(Creature attacker, Creature target)
     {
-        Debug.Log("Attack2");
+        deleteButtons();
+        Debug.Log(attacker.name + " attacks " + target.name);
+        generateActions();
     }
 
     private Button SpaceButton(TileStats tile)

@@ -27,13 +27,16 @@ public class Creature : MonoBehaviour
     {
         //place character into correct positon?
         currentSpace = BattleData.instance.map[characterX, characterY];
-        transform.position = currentSpace.Location;        
+        transform.position = currentSpace.Location;
+        currentSpace.unit = this;
     }
 
     public void MoveCharacter(TileStats space)
     {
+        currentSpace.unit = null;
         transform.position =  space.Location;
         currentSpace = space;
+        currentSpace.unit = this;
     }
 
     TileStats get_data(int x, int y)
