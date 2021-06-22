@@ -75,7 +75,11 @@ public class BattleData : MonoBehaviour
 
     public void MoveAction()
     {
+        //Actions that have to happen every time
         deleteButtons();
+        var cancel = choiceButton("cancel");
+        cancel.onClick.AddListener(cancelAction);
+
         var spaces = player.breadth_first_search(player.Move);
         foreach(var space in spaces)
         {
@@ -87,13 +91,14 @@ public class BattleData : MonoBehaviour
 
     public void AttackAction()
     {
+        //Actions that have to happen every time
         deleteButtons();
-        //Get attack spaces
+        var cancel = choiceButton("cancel");
+        cancel.onClick.AddListener(cancelAction);
+
         var spaces = player.breadth_first_search(1);
-        //Generate Button for every enemy in range. (simplify to creature)
         foreach(var space in spaces)
         {
-            //Only put a button on the space if the space has an enemy
             if(space.Item1.unit != null)
             {
                 var button = SpaceButton(space.Item1);
@@ -101,7 +106,12 @@ public class BattleData : MonoBehaviour
             }
             space.Item1.Selectable = false;
         }
-        //Give each button a function to preform the attack, with its target
+    }
+
+    public void cancelAction()
+    {
+        deleteButtons();
+        generateActions();
     }
 
     private void PreformMove(int x, int y)
