@@ -280,13 +280,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1d2149f1437e24a9cd89440f3f3644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Jim the bad knight
   Move: 3
   characterX: 12
   characterY: 3
   accuracy: 0
-  dodge: 0
-  attack: 0
-  defence: 0
+  luck: 0
+  dodge: 50
+  attack: 2
+  defence: 20
 --- !u!212 &226180859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -501,13 +503,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1d2149f1437e24a9cd89440f3f3644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Tim the Knight
   Move: 3
   characterX: 9
   characterY: 9
-  accuracy: 0
-  dodge: 0
-  attack: 0
-  defence: 0
+  accuracy: 10
+  luck: 100
+  dodge: 10
+  attack: 25
+  defence: 10
 --- !u!1 &949445909
 GameObject:
   m_ObjectHideFlags: 0

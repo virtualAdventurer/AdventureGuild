@@ -124,7 +124,24 @@ public class BattleData : MonoBehaviour
     private void PreformAttack(Creature attacker, Creature target)
     {
         deleteButtons();
-        Debug.Log(attacker.name + " attacks " + target.name);
+        var hit = attacker.GetAccuracy();
+        var dodge = target.GetDodge();
+        var damage = attacker.GetAttack() - target.GetDefence();
+        if(hit >= dodge)
+        {
+            if(damage > 0)
+            {
+                Debug.Log(attacker.characterName + " does " +  damage + " damage to " + target.characterName);
+            }
+            else
+            {
+                Debug.Log(attacker.characterName + " does 0 damage to " + target.characterName);
+            }
+        }
+        else
+        {
+            Debug.Log(target.characterName + " dodges an attack from " + attacker.characterName);
+        }
         generateActions();
     }
 
