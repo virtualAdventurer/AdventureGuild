@@ -151,21 +151,27 @@ public class BattleData : MonoBehaviour
         return button;
     }
 
+    private Button choiceButton(string f_text, int place = 0)
+    {
+        GameObject buttonObject = Instantiate(ActionButtonTemplate, screen.transform);
+        var button = buttonObject.GetComponent<Button>();
+        var textComponent = button.transform.GetChild(0).GetComponent<Text>();
+        textComponent.text = f_text;
+        var rectTransform = buttonObject.GetComponent<RectTransform>();
+        rectTransform.localPosition = new Vector2(0, place * rectTransform.sizeDelta.y);
+
+        buttons.Add(buttonObject);
+        return button;
+    }
+
     private void generateActions()
     {
         for (int i = 0; i < actionList.Count; i++)
         {
             var action = actionList[i];
 
-            GameObject buttonObject = Instantiate(ActionButtonTemplate, screen.transform);
-            var button = buttonObject.GetComponent<Button>();
+            var button = choiceButton(action.getName(), i);
             button.onClick.AddListener(action.preformAction);
-            var text = button.transform.GetChild(0).GetComponent<Text>();
-            text.text = action.getName();
-            var rectTransform = buttonObject.GetComponent<RectTransform>();
-            rectTransform.localPosition = new Vector2(0, i * rectTransform.sizeDelta.y);
-
-            buttons.Add(buttonObject);
         }
     }
 
