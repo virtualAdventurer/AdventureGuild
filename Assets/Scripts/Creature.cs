@@ -13,6 +13,7 @@ public class Creature : MonoBehaviour
     public TileStats currentSpace;
     //Battle Stats
     public int accuracy;
+    public int luck;
     public int dodge;
     public int attack;
     public int defence;
@@ -113,7 +114,8 @@ public class Creature : MonoBehaviour
     }
     public int GetAccuracy()
     {
-        return accuracy;
+
+        return accuracy + Random.Range(0, luck);
     }
     public int GetDodge()
     {
