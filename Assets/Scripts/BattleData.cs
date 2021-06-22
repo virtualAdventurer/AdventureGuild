@@ -24,6 +24,8 @@ public class BattleData : MonoBehaviour
 
     private List<Action> actionList;
 
+    private List<GameObject> buttons;
+
     private void Awake()
     {
         if (instance == null)
@@ -64,28 +66,21 @@ public class BattleData : MonoBehaviour
         actionList.Add(new Action("Attack", AttackAction));
         actionList.Add(new Action("Move", MoveAction));
 
-        //Create buttons for each action
-        for (int i = 0; i < actionList.Count; i++)
-        {
-            var action = actionList[i];
+        buttons = new List<GameObject>();
 
-            GameObject buttonObject = Instantiate(ActionButtonTemplate, screen.transform);
-            var button = buttonObject.GetComponent<Button>();
-            button.onClick.AddListener(action.preformAction);
-            var text = button.transform.GetChild(0).GetComponent<Text>();
-            text.text = action.getName();
-            var rectTransform = buttonObject.GetComponent<RectTransform>();
-            rectTransform.localPosition = new Vector2(0, i * rectTransform.sizeDelta.y);
-        }
+        //Debug.Log(actionList);
+        generateActions();
     }
 
     public void MoveAction()
     {
+        deleteButtons();
         var spaces = player.breadth_first_search(player.Move);
         foreach(var space in spaces)
         {
             var button = SpaceButton(space.Item1);
             button.onClick.AddListener(() => PreformMove(space.Item1.x, space.Item1.y));
+            space.Item1.Selectable = false;
         }
     }
 
@@ -96,7 +91,9 @@ public class BattleData : MonoBehaviour
 
     private void PreformMove(int x, int y)
     {
+        deleteButtons();
         player.MoveCharacter(map[x, y]);
+        generateActions();
     }
 
     private void PreformAttack()
@@ -132,7 +129,36 @@ public class BattleData : MonoBehaviour
         var Offset = screen.renderingDisplaySize / 2;
         rectTransform.localPosition = positionInPixels - Offset;
 
+        buttons.Add(buttonObject);
+
         return button;
+    }
+
+    private void generateActions()
+    {
+        for (int i = 0; i < actionList.Count; i++)
+        {
+            var action = actionList[i];
+
+            GameObject buttonObject = Instantiate(ActionButtonTemplate, screen.transform);
+            var button = buttonObject.GetComponent<Button>();
+            button.onClick.AddListener(action.preformAction);
+            var text = button.transform.GetChild(0).GetComponent<Text>();
+            text.text = action.getName();
+            var rectTransform = buttonObject.GetComponent<RectTransform>();
+            rectTransform.localPosition = new Vector2(0, i * rectTransform.sizeDelta.y);
+
+            buttons.Add(buttonObject);
+        }
+    }
+
+    private void deleteButtons()
+    {
+        for(int i = 0; i < buttons.Count; i++)
+        {
+            Destroy(buttons[i]);
+        }
+        buttons.Clear();
     }
 
 }
