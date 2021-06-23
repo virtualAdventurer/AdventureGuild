@@ -12,15 +12,17 @@ public class Creature : MonoBehaviour
 
     public TileStats currentSpace;
     //Battle Stats
+    public int maxHP;
     public int accuracy;
     public int luck;
     public int dodge;
     public int attack;
     public int defence;
+    private int currentHP;
  
     void Start()
     {
-        
+        currentHP = maxHP;
     }
 
     public void PlayerBoot()
@@ -51,8 +53,6 @@ public class Creature : MonoBehaviour
 
     TileStats getSpace()
     {
-        //Vector3 point = transform.position;
-        //var worldPoint = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
         return currentSpace;
     }
 
@@ -123,5 +123,15 @@ public class Creature : MonoBehaviour
     public int GetDodge()
     {
         return dodge;
+    }
+
+    public void AddDamage(int damage)
+    {
+        currentHP -= damage;
+    }
+
+    public bool IsDead()
+    {
+        return currentHP <= 0;
     }
 }

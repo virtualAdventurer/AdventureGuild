@@ -284,6 +284,7 @@ MonoBehaviour:
   Move: 3
   characterX: 12
   characterY: 3
+  maxHP: 50
   accuracy: 0
   luck: 0
   dodge: 50
@@ -507,6 +508,7 @@ MonoBehaviour:
   Move: 3
   characterX: 9
   characterY: 9
+  maxHP: 50
   accuracy: 10
   luck: 100
   dodge: 10

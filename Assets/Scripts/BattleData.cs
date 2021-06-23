@@ -118,7 +118,7 @@ public class BattleData : MonoBehaviour
     {
         deleteButtons();
         player.MoveCharacter(map[x, y]);
-        generateActions();
+        endTurn();
     }
 
     private void PreformAttack(Creature attacker, Creature target)
@@ -132,6 +132,7 @@ public class BattleData : MonoBehaviour
             if(damage > 0)
             {
                 Debug.Log(attacker.characterName + " does " +  damage + " damage to " + target.characterName);
+                target.AddDamage(damage);
             }
             else
             {
@@ -142,7 +143,24 @@ public class BattleData : MonoBehaviour
         {
             Debug.Log(target.characterName + " dodges an attack from " + attacker.characterName);
         }
-        generateActions();
+
+        //If the this attack causes the target to die, remove him from the game
+        //Find a better way to do this than just deleting the target, remove him from the list.
+        if(target.IsDead())
+        {
+            Destroy(target.gameObject);
+
+            //Really bad temp design, this is in place until I can get a list of characters, and create a better methond
+            //than just a variable for each person.
+            if(target.name == "Player")
+                player = null;
+            if(target.name == "Enemy")
+                enemy = null;
+
+        }
+
+
+        endTurn();
     }
 
     private Button SpaceButton(TileStats tile)
@@ -211,4 +229,23 @@ public class BattleData : MonoBehaviour
         buttons.Clear();
     }
 
+
+    private void endTurn()
+    {
+        //Win Condition
+        if(enemy == null)
+        {
+            Debug.Log("Player Wins");
+        }
+        //Lose Condition
+        else if(player == null)
+        {
+            Debug.Log("Player Loses");
+        }
+        //Continue Condition
+        else
+        {
+            generateActions();
+        }
+    }
 }
