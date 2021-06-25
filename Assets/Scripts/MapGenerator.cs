@@ -2,24 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 
 public class MapGenerator : MonoBehaviour
 {
-    
-    public void Generate()
+    private string mapName;
+    private int mapWidth;
+    private int mapHeight;
+
+    public void Start()
     {
-        var fields = GetComponents<TextField>();
-        foreach(var field in fields)
+        mapName = "Untitled";
+        mapWidth = 0;
+        mapHeight = 0;
+    }
+
+    public void Generate()
+    { 
+        Debug.Log("Name is " + mapName);
+        Debug.Log("Height is " + mapHeight);
+        Debug.Log("Width is " + mapWidth);
+    }
+
+    public void editName(string text)
+    {
+        mapName = text;
+    }
+
+    public void editWidth(string text)
+    {
+        try
         {
-            Debug.Log(field.name + " has " + field.text);
+            mapWidth = Int32.Parse(text);
         }
-        //string name = nameField.text;
-        //int height = heightField;
-        //int width = widthField;
+        catch (FormatException)
+        {
+            //Display this on the screen!
+            Debug.Log("Please Enter a number!");
+        }
+    }
 
-
-        //Debug.Log("Name is " + name);
-        //Debug.Log("Height is " + height);
-        //Debug.Log("Width is " + width);
+    public void editHeight(string text)
+    {
+        try
+        {
+            mapHeight = Int32.Parse(text);
+        }
+        catch (FormatException)
+        {
+            //Display this on the screen!
+            Debug.Log("Please Enter a number!");
+        }
     }
 }
