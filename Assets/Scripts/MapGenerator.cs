@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Tilemaps;
 using System;
 
 public class MapGenerator : MonoBehaviour
@@ -9,19 +10,43 @@ public class MapGenerator : MonoBehaviour
     private string mapName;
     private int mapWidth;
     private int mapHeight;
+    private TileStats[,] map;
+    public Tilemap Ground;
+    public TileBase grass;
 
     public void Start()
     {
         mapName = "Untitled";
         mapWidth = 0;
         mapHeight = 0;
+        map = null;        
     }
 
     public void Generate()
     { 
-        Debug.Log("Name is " + mapName);
-        Debug.Log("Height is " + mapHeight);
-        Debug.Log("Width is " + mapWidth);
+        if(mapWidth <= 0 || mapHeight <= 0)
+        {
+            Debug.Log("Please enter values greator than zero for the height and width");
+        }
+        else
+        {
+            map = new TileStats[mapWidth, mapHeight];
+
+            for(int i = 0; i < mapWidth; i++)
+            {
+                for(int t = 0; t < mapHeight; t++)
+                {
+                    Vector3Int position = new Vector3Int(i, t, 0);
+                    map[i, t] = new TileStats();
+                    map[i, t].TilemapMember = Ground;
+                    map[i, t].TilemapMember.SetTile(position, grass);
+                    map[i, t].Location = position;
+                    map[i, t].unit = null;
+                    map[i, t].x = i;
+                    map[i, t].y = t;
+                }
+            }
+        }
     }
 
     public void editName(string text)
