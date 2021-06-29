@@ -37,13 +37,7 @@ public class MapGenerator : MonoBehaviour
                 for(int t = 0; t < mapHeight; t++)
                 {
                     Vector3Int position = new Vector3Int(i, t, 0);
-                    map[i, t] = new TileStats();
-                    map[i, t].TilemapMember = Ground;
-                    map[i, t].TilemapMember.SetTile(position, grass);
-                    map[i, t].Location = position;
-                    map[i, t].unit = null;
-                    map[i, t].x = i;
-                    map[i, t].y = t;
+                    map[i, t] = new TileStats(Ground, position, grass, i, t);
                 }
             }
         }

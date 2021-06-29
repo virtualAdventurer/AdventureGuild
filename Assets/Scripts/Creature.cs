@@ -74,16 +74,16 @@ public class Creature : MonoBehaviour
             int current_cost = temp.Item2;
 
             //var up = new Vector3(current_space.Location.x , current_space.Location.y + 1, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y + 1), current_cost + 1, range);
+            breadth_add_to_queue(need_to_visit, (current_space.m_x, current_space.m_y + 1), current_cost + 1, range);
         
             //var left = new Vector3(current_space.Location.x - 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x - 1, current_space.y), current_cost + 1, range);
+            breadth_add_to_queue(need_to_visit, (current_space.m_x - 1, current_space.m_y), current_cost + 1, range);
 
             //var right = new Vector3(current_space.Location.x + 1, current_space.Location.y, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x + 1, current_space.y), current_cost + 1, range);
+            breadth_add_to_queue(need_to_visit, (current_space.m_x + 1, current_space.m_y), current_cost + 1, range);
 
             //var down = new Vector3(current_space.Location.x, current_space.Location.y - 1, 0);
-            breadth_add_to_queue(need_to_visit, (current_space.x, current_space.y - 1), current_cost + 1, range);
+            breadth_add_to_queue(need_to_visit, (current_space.m_x, current_space.m_y - 1), current_cost + 1, range);
 
             if(current_cost <= range)
             {
