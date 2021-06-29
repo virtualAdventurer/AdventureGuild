@@ -13,6 +13,7 @@ public class MapGenerator : MonoBehaviour
     private TileStats[,] map;
     public Tilemap Ground;
     public TileBase grass;
+    public Animator UIController;
 
     public void Start()
     {
@@ -31,6 +32,7 @@ public class MapGenerator : MonoBehaviour
         else
         {
             map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
+            UIController.SetBool("Map Generated", true);
         }
     }
 
