@@ -30,7 +30,7 @@ public class TileStats
         Selectable = false;
     }
 
-    static public TileStats[,] GenerateMap(int height, int width, Tilemap ground, TileBase sprite)
+    static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
     {
         var map = new TileStats[width, height];
 

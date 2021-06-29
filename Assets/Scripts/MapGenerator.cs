@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            map = TileStats.GenerateMap(mapWidth, mapHeight, Ground, grass);
+            map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
         }
     }
 
