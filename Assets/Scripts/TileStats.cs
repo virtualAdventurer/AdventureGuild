@@ -30,4 +30,19 @@ public class TileStats
         Selectable = false;
     }
 
+    static public TileStats[,] GenerateMap(int height, int width, Tilemap ground, TileBase sprite)
+    {
+        var map = new TileStats[width, height];
+
+            for(int i = 0; i < width; i++)
+            {
+                for(int t = 0; t < height; t++)
+                {
+                    Vector3Int position = new Vector3Int(i, t, 0);
+                    map[i, t] = new TileStats(ground, position, sprite, i, t);
+                }
+            }
+        return map;
+    }
+
 }

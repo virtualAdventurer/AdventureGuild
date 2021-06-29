@@ -30,16 +30,7 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            map = new TileStats[mapWidth, mapHeight];
-
-            for(int i = 0; i < mapWidth; i++)
-            {
-                for(int t = 0; t < mapHeight; t++)
-                {
-                    Vector3Int position = new Vector3Int(i, t, 0);
-                    map[i, t] = new TileStats(Ground, position, grass, i, t);
-                }
-            }
+            map = TileStats.GenerateMap(mapWidth, mapHeight, Ground, grass);
         }
     }
 
@@ -73,4 +64,5 @@ public class MapGenerator : MonoBehaviour
             Debug.Log("Please Enter a number!");
         }
     }
+
 }

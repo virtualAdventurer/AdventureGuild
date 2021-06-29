@@ -40,17 +40,8 @@ public class BattleData : MonoBehaviour
 
     void Start()
     {
-        //Temp map generator
-        map = new TileStats[mapWidth, mapHeight];
-
-        for(int i = 0; i < mapWidth; i++)
-        {
-            for(int t = 0; t < mapHeight; t++)
-            {
-                Vector3Int position = new Vector3Int(i, t, 0);
-                map[i, t] = new TileStats(Ground, position, grass, i, t);
-            }
-        }
+        //Temp map generation
+        map = TileStats.GenerateMap(mapWidth, mapHeight, Ground, grass);
 
         //Place Creatures on the map
         player.PlayerBoot();
