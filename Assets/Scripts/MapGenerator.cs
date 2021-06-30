@@ -18,9 +18,11 @@ public class MapGenerator : MonoBehaviour
     public void Start()
     {
         mapName = "Untitled";
-        mapWidth = 0;
-        mapHeight = 0;
-        map = null;        
+        mapWidth = 10;
+        mapHeight = 10;
+        map = null;
+
+        Generate();
     }
 
     public void Generate()
