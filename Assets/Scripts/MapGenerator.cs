@@ -22,8 +22,6 @@ public class MapGenerator : MonoBehaviour
         mapWidth = 0;
         mapHeight = 0;
         map = null;
-
-        //Generate();
     }
 
     public void Generate()

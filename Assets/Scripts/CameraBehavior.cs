@@ -11,13 +11,15 @@ public class CameraBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Screen.width);
-        Debug.Log(Screen.height);
         var warpedPosition = new Vector2(Screen.width / 2, Screen.height / 2);
         //Appreantly this may not be recomended
         //Maybe find a better solutiong instead of using low level?
         Mouse.current.WarpCursorPosition(warpedPosition);
         InputState.Change(Mouse.current.position, warpedPosition);
+
+        //transform.position = new Vector3(Screen.width / 2, 0, -10);
+        var cam = GetComponent<Camera>();
+        transform.position = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class CameraBehavior : MonoBehaviour
             {
                 transform.Translate(Vector3.up * speed);
             }
-            
+
         }
     }
 }
