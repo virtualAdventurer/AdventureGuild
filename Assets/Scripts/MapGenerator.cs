@@ -14,15 +14,16 @@ public class MapGenerator : MonoBehaviour
     public Tilemap Ground;
     public TileBase grass;
     public Animator UIController;
+    public CameraBehavior cam;
 
     public void Start()
     {
         mapName = "Untitled";
-        mapWidth = 10;
-        mapHeight = 10;
+        mapWidth = 0;
+        mapHeight = 0;
         map = null;
 
-        Generate();
+        //Generate();
     }
 
     public void Generate()
@@ -35,6 +36,7 @@ public class MapGenerator : MonoBehaviour
         {
             map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
             UIController.SetBool("Map Generated", true);
+            cam.controlsActive = true;
         }
     }
 

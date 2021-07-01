@@ -942,6 +942,7 @@ MonoBehaviour:
   Ground: {fileID: 1602962249}
   grass: {fileID: 11400000, guid: ccf3ee570cd443f4b806da2fc3be283a, type: 2}
   UIController: {fileID: 1871591389}
+  cam: {fileID: 1384218943}
 --- !u!4 &1015826068
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015826066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 373.4095, y: 252.80211, z: -157.96591}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1132,6 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
+  controlsActive: 0
 --- !u!1 &1421516799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1871591384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,6 +1846,7 @@ MonoBehaviour:
   Ground: {fileID: 0}
   grass: {fileID: 0}
   UIController: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!95 &1871591389
 Animator:
   serializedVersion: 3

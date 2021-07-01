@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.LowLevel;
 public class CameraBehavior : MonoBehaviour
 {
     public float speed;
+    public bool controlsActive;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,26 +23,27 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var mousePos = Mouse.current.position.ReadValue();
-        if(mousePos.x <= 0)
+        if(controlsActive)
         {
-            transform.Translate(Vector3.left * speed);
-        }
-        else if(mousePos.x >= Screen.width)
-        {
-            transform.Translate(Vector3.right * speed);
-        }
+            var mousePos = Mouse.current.position.ReadValue();
+            if(mousePos.x <= 0)
+            {
+                transform.Translate(Vector3.left * speed);
+            }
+            else if(mousePos.x >= Screen.width)
+            {
+                transform.Translate(Vector3.right * speed);
+            }
 
-        if(mousePos.y <= 0)
-        {
-            transform.Translate(Vector3.down * speed);
+            if(mousePos.y <= 0)
+            {
+                transform.Translate(Vector3.down * speed);
+            }
+            else if(mousePos.y >= Screen.height)
+            {
+                transform.Translate(Vector3.up * speed);
+            }
+            
         }
-        else if(mousePos.y >= Screen.height)
-        {
-            transform.Translate(Vector3.up * speed);
-        }
-
-        Debug.Log(mousePos);
-
     }
 }
