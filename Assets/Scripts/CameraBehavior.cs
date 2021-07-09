@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Tilemaps;
 
 public class CameraBehavior : MonoBehaviour
 {
     public float speed;
     public bool controlsActive;
+    public Tilemap map;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,24 +30,30 @@ public class CameraBehavior : MonoBehaviour
         if(controlsActive)
         {
             var mousePos = Mouse.current.position.ReadValue();
-            if(mousePos.x <= 0)
+            
+            if(map.size.x > Screen.width / 64)
             {
-                transform.Translate(Vector3.left * speed);
-            }
-            else if(mousePos.x >= Screen.width)
-            {
-                transform.Translate(Vector3.right * speed);
-            }
-
-            if(mousePos.y <= 0)
-            {
-                transform.Translate(Vector3.down * speed);
-            }
-            else if(mousePos.y >= Screen.height)
-            {
-                transform.Translate(Vector3.up * speed);
+                if(mousePos.x <= 0)
+                {
+                    transform.Translate(Vector3.left * speed);
+                }
+                else if(mousePos.x >= Screen.width)
+                {
+                    transform.Translate(Vector3.right * speed);
+                }
             }
 
+            if(map.size.y > Screen.height / 64)
+            {
+                if(mousePos.y <= 0)
+                {
+                    transform.Translate(Vector3.down * speed);
+                }
+                else if(mousePos.y >= Screen.height)
+                {
+                    transform.Translate(Vector3.up * speed);
+                }
+            }
         }
     }
 }

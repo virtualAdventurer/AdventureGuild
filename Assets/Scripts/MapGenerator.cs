@@ -35,6 +35,7 @@ public class MapGenerator : MonoBehaviour
             map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
             UIController.SetBool("Map Generated", true);
             cam.controlsActive = true;
+            cam.map = Ground;
         }
     }
 
