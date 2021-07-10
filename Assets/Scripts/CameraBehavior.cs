@@ -10,6 +10,7 @@ public class CameraBehavior : MonoBehaviour
     public float speed;
     public bool controlsActive;
     public Tilemap map;
+    private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class CameraBehavior : MonoBehaviour
         InputState.Change(Mouse.current.position, warpedPosition);
 
         //transform.position = new Vector3(Screen.width / 2, 0, -10);
-        var cam = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         transform.position = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
     }
 
@@ -30,26 +31,36 @@ public class CameraBehavior : MonoBehaviour
         if(controlsActive)
         {
             var mousePos = Mouse.current.position.ReadValue();
+            Vector3 lowerCorner = cam.ViewportToWorldPoint(new Vector3(0, 0, 0));
+            Vector3 upperCorner = cam.ViewportToWorldPoint(new Vector3(1, 1, 0));
+
+            float bottom = lowerCorner.y;
+            float top = upperCorner.y;
+            float left = lowerCorner.x;
+            float right = upperCorner.x;
+
+            float height = cam.orthographicSize;
+            float width = cam.aspect * height;
             
-            if(map.size.x > Screen.width / 64)
+            if(map.size.x > width * 2)
             {
-                if(mousePos.x <= 0)
+                if(mousePos.x <= 0 && left > 0)
                 {
                     transform.Translate(Vector3.left * speed);
                 }
-                else if(mousePos.x >= Screen.width)
+                else if(mousePos.x >= Screen.width && right <= map.size.x)
                 {
                     transform.Translate(Vector3.right * speed);
                 }
             }
 
-            if(map.size.y > Screen.height / 64)
+            if(map.size.y > height * 2)
             {
-                if(mousePos.y <= 0)
+                if(mousePos.y <= 0 && bottom > 0)
                 {
                     transform.Translate(Vector3.down * speed);
                 }
-                else if(mousePos.y >= Screen.height)
+                else if(mousePos.y >= Screen.height && top < map.size.y)
                 {
                     transform.Translate(Vector3.up * speed);
                 }
