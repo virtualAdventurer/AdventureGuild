@@ -8,21 +8,19 @@ using UnityEngine.Tilemaps;
 public class CameraBehavior : MonoBehaviour
 {
     public float speed;
-    public bool controlsActive;
-    public Tilemap map;
+    private bool controlsActive;
+    private Tilemap map;
     private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
+        cam = GetComponent<Camera>();
         var warpedPosition = new Vector2(Screen.width / 2, Screen.height / 2);
         //Appreantly this may not be recomended
         //Maybe find a better solutiong instead of using low level?
         Mouse.current.WarpCursorPosition(warpedPosition);
         InputState.Change(Mouse.current.position, warpedPosition);
-
-        //transform.position = new Vector3(Screen.width / 2, 0, -10);
-        cam = GetComponent<Camera>();
-        transform.position = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+        controlsActive = false;
     }
 
     // Update is called once per frame
@@ -66,5 +64,28 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Center(Tilemap m)
+    {
+        map = m;
+
+        float height = cam.orthographicSize;
+        float width = cam.aspect * height;
+
+        Vector3 move = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+
+        if(map.size.x < width * 2)
+        {
+            move.x = map.size.x / 2f;
+        }
+
+        if(map.size.y < height * 2)
+        {
+            move.y = map.size.y / 2f;
+        }
+
+        transform.position = move;
+        controlsActive = true;
     }
 }
