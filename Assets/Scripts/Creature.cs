@@ -64,7 +64,7 @@ public class Creature : MonoBehaviour
         Queue<(TileStats, int)> need_to_visit = new Queue<(TileStats, int)>();
         List<(TileStats, int)> can_reach = new List<(TileStats, int)>();
         need_to_visit.Enqueue((space, 0));
-        space.Selectable = true;
+        space.selectable = true;
 
         while(need_to_visit.Count > 0)
         {
@@ -99,10 +99,10 @@ public class Creature : MonoBehaviour
     private void breadth_add_to_queue(Queue<(TileStats, int)> q, (int, int) pos, int c, int r)
     {
         TileStats tile = get_data(pos.Item1, pos.Item2);
-        if(tile != null && !tile.Selectable && c <= r)
+        if(tile != null && !tile.selectable && c <= r)
         {
             q.Enqueue((tile, c));
-            tile.Selectable = true;
+            tile.selectable = true;
         }
     }
 

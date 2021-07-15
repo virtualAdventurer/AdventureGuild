@@ -70,7 +70,7 @@ public class BattleData : MonoBehaviour
         {
             var button = SpaceButton(space.Item1);
             button.onClick.AddListener(() => PreformMove(space.Item1.m_x, space.Item1.m_y));
-            space.Item1.Selectable = false;
+            space.Item1.selectable = false;
         }
     }
 
@@ -89,7 +89,7 @@ public class BattleData : MonoBehaviour
                 var button = SpaceButton(space.Item1);
                 button.onClick.AddListener(() => PreformAttack(player, space.Item1.unit));
             }
-            space.Item1.Selectable = false;
+            space.Item1.selectable = false;
         }
     }
 

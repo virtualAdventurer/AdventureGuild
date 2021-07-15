@@ -16,7 +16,7 @@ public class TileStats
     public Creature unit {get; set;}
 
     //Data for breadth first search
-    public bool Selectable {get; set;}
+    public bool selectable {get; set;}
 
     public TileStats(Tilemap tilemap, Vector3Int pos, TileBase sprite, int x, int y)
     {
@@ -27,7 +27,7 @@ public class TileStats
         m_y = y;
 
         unit = null;
-        Selectable = false;
+        selectable = false;
     }
 
     static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
