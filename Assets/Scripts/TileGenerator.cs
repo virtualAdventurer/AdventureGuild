@@ -32,6 +32,7 @@ public class TileGenerator : MonoBehaviour
             spriteDropdown.options.Add(option);
             option_to_sprite.Add(i, spriteList[i]);
         }
+
     }
 
     public void AddTile()
@@ -40,6 +41,7 @@ public class TileGenerator : MonoBehaviour
         tiles.Add(tile);
 
         GameObject TilePreview = Resources.Load<GameObject>("Buttons/Tile-Preview");
+
         
         
         //Add sprite
@@ -49,12 +51,17 @@ public class TileGenerator : MonoBehaviour
         Text display_name = TilePreview.GetComponentInChildren<Text>();
         display_name.text = idTextBox.text;
 
+        //Increase size of Tile Preview
+        var content_transform = sv_Content.GetComponent<RectTransform>();
+        content_transform.sizeDelta += new Vector2(0, 64 + 8);        
+
+        //Set position inside the preview so it fits
+        //Why does the first Tile I generate use default values, it makes no sense?
+        var preview_transform = TilePreview.GetComponent<RectTransform>();
+        preview_transform.position = new Vector3(0, -((tiles.Count) * 64) - ((tiles.Count) * 8) - 8, 0);
+
         //Add TilePreview to the content.
         Instantiate(TilePreview, sv_Content.transform);
-
-        //Increase size of Tile Preview
-        //Set position inside the preview so it fits
-
     }
 
     public void SaveTiles()
