@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class TileGenerator : MonoBehaviour
 {
-    //temp classes for now
+    //UI buttons assigned for easy access
     public InputField idTextBox;
     public Dropdown spriteDropdown;
+    public GameObject sv_Content;
 
+    //Data to keep track of
     private Sprite[] spriteList;
     private List<TileTemplate> tiles;
     private Dictionary<int, Sprite> option_to_sprite;
@@ -36,6 +38,23 @@ public class TileGenerator : MonoBehaviour
     {
         TileTemplate tile = new TileTemplate(idTextBox.text, option_to_sprite[spriteDropdown.value]);
         tiles.Add(tile);
+
+        GameObject TilePreview = Resources.Load<GameObject>("Buttons/Tile-Preview");
+        
+        
+        //Add sprite
+        Image display = TilePreview.GetComponentInChildren<Image>();
+        display.sprite = option_to_sprite[spriteDropdown.value];
+        //Add text
+        Text display_name = TilePreview.GetComponentInChildren<Text>();
+        display_name.text = idTextBox.text;
+
+        //Add TilePreview to the content.
+        Instantiate(TilePreview, sv_Content.transform);
+
+        //Increase size of Tile Preview
+        //Set position inside the preview so it fits
+
     }
 
     public void SaveTiles()
