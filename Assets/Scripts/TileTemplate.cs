@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TileTemplate 
 {
-    public Sprite sprite {get; set;}
+    public TileBase t_base {get; set;}
     public string id {get; set;}
 
     public TileTemplate()
     {
         id = "untitled";
-        sprite = null;
+        t_base = null;
     }
 
-    public TileTemplate(string m_id, Sprite m_sprite)
+    public TileTemplate(string m_id, TileBase m_sprite)
     {
         id = m_id;
-        sprite = m_sprite;
+        t_base = m_sprite;
     }
 
 }
