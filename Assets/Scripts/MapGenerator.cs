@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
@@ -32,9 +34,20 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
-            UIController.SetBool("Map Generated", true);
-            cam.Center(Ground);
+            FileStream stream = new FileStream("Assets/Resources/TileData/Test.XML", FileMode.Open);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<TileTemplate>));
+            var tiles = serializer.Deserialize(stream);
+            
+            if(/*tiles.Count >= 1*/true)
+            {
+                map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
+                UIController.SetBool("Map Generated", true);
+                cam.Center(Ground);
+            }
+            else
+            {
+                Debug.Log("No Tile Data set found!");
+            }
         }
     }
 

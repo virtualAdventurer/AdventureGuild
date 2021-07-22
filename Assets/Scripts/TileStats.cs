@@ -30,6 +30,20 @@ public class TileStats
         selectable = false;
     }
 
+    public TileStats(Tilemap tilemap, Vector3Int pos, TileTemplate template, int x, int y)
+    {
+        TilemapMember = tilemap;
+        Tile tile = new Tile();
+        tile.sprite = template.sprite;
+        TilemapMember.SetTile(pos, tile);
+        Location = pos;
+        m_x = x;
+        m_y = y;
+
+        unit = null;
+        selectable = false;
+    }
+
     static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
     {
         var map = new TileStats[width, height];
@@ -40,6 +54,21 @@ public class TileStats
                 {
                     Vector3Int position = new Vector3Int(i, t, 0);
                     map[i, t] = new TileStats(ground, position, sprite, i, t);
+                }
+            }
+        return map;
+    }
+
+    static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileTemplate template)
+    {
+        var map = new TileStats[width, height];
+
+            for(int i = 0; i < width; i++)
+            {
+                for(int t = 0; t < height; t++)
+                {
+                    Vector3Int position = new Vector3Int(i, t, 0);
+                    map[i, t] = new TileStats(ground, position, template, i, t);
                 }
             }
         return map;
