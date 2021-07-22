@@ -4,7 +4,6 @@ using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Tilemaps;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -14,13 +13,13 @@ public class TileGenerator : MonoBehaviour
     public GameObject sv_Content;
 
     //Data to keep track of
-    private TileBase[] spriteList;
+    private Sprite[] spriteList;
     private List<TileTemplate> tiles;
-    private Dictionary<int, TileBase> option_to_tile;
+    private Dictionary<int, Sprite> option_to_sprite;
     void Start()
     {
-        spriteList = Resources.LoadAll<TileBase>("TileBases");
-        option_to_tile = new Dictionary<int, TileBase>();
+        spriteList = Resources.LoadAll<Sprite>("TileSprites");
+        option_to_sprite = new Dictionary<int, Sprite>();
 
         //If the player selected new Tile file;
         tiles = new List<TileTemplate>();
@@ -29,16 +28,16 @@ public class TileGenerator : MonoBehaviour
         //temp
         for(int i = 0; i < spriteList.Length; i++)
         {
-            Dropdown.OptionData option = new Dropdown.OptionData(spriteList[i].name);
+            Dropdown.OptionData option = new Dropdown.OptionData(spriteList[i].name, spriteList[i]);
             spriteDropdown.options.Add(option);
-            option_to_tile.Add(i, spriteList[i]);
+            option_to_sprite.Add(i, spriteList[i]);
         }
 
     }
 
     public void AddTile()
     {
-        TileTemplate tile = new TileTemplate(idTextBox.text, option_to_tile[spriteDropdown.value]);
+        TileTemplate tile = new TileTemplate(idTextBox.text, option_to_sprite[spriteDropdown.value]);
         tiles.Add(tile);
 
         GameObject TilePreview = Resources.Load<GameObject>("Buttons/Tile-Preview");
@@ -47,7 +46,7 @@ public class TileGenerator : MonoBehaviour
         
         //Add sprite
         Image display = TilePreview.GetComponentInChildren<Image>();
-        display.sprite = option_to_tile[spriteDropdown.value].;
+        display.sprite = option_to_sprite[spriteDropdown.value];
         //Add text
         Text display_name = TilePreview.GetComponentInChildren<Text>();
         display_name.text = idTextBox.text;

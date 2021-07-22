@@ -2,23 +2,23 @@
 <ArrayOfTileTemplate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TileTemplate>
     <sprite>
-      <name>dirt-1</name>
-      <hideFlags>None</hideFlags>
-    </sprite>
-    <id>Tile1</id>
-  </TileTemplate>
-  <TileTemplate>
-    <sprite>
       <name>grass-1</name>
       <hideFlags>None</hideFlags>
     </sprite>
-    <id>Tile2</id>
+    <id>Test</id>
+  </TileTemplate>
+  <TileTemplate>
+    <sprite>
+      <name>dirt-1</name>
+      <hideFlags>None</hideFlags>
+    </sprite>
+    <id>Test2</id>
   </TileTemplate>
   <TileTemplate>
     <sprite>
       <name>grass-2</name>
       <hideFlags>None</hideFlags>
     </sprite>
-    <id>Tile3</id>
+    <id>Test3</id>
   </TileTemplate>
 </ArrayOfTileTemplate>

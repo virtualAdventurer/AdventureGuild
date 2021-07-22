@@ -30,18 +30,6 @@ public class TileStats
         selectable = false;
     }
 
-    /*public TileStats(Tilemap tilemap, Vector3Int pos, TileTemplate tile, int x, int y)
-    {
-        TilemapMember = tilemap;
-        TilemapMember.SetTile(pos, tile);
-        Location = pos;
-        m_x = x;
-        m_y = y;
-
-        unit = null;
-        selectable = false;
-    }*/
-
     static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
     {
         var map = new TileStats[width, height];
