@@ -6,6 +6,90 @@
             "id": "dd121543-fe68-410a-9b9c-9a1be60f1717",
             "actions": [],
             "bindings": []
+        },
+        {
+            "name": "Grid Selection",
+            "id": "cd044430-d4a6-414f-a78c-a45d1e6f21af",
+            "actions": [
+                {
+                    "name": "Selector Left",
+                    "type": "Button",
+                    "id": "ed554118-cbe6-4c73-a25d-774084835d20",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Selector Right",
+                    "type": "Button",
+                    "id": "0aafb280-dc8a-4ded-9214-ac7990fb72f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Selector Up",
+                    "type": "Button",
+                    "id": "99b7f082-c811-4abf-a829-992717bad905",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Selector Down",
+                    "type": "Button",
+                    "id": "20e49e7b-ff5c-4c67-a0b0-38a6cc94eddf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "841e58b8-72bb-477f-af51-daa9ef77d2d8",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Selector Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba7fe6e2-326a-41a4-9477-23502254af27",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Selector Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e137505-9862-4ffd-a063-42c03e544c02",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Selector Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "798adc83-92e5-44ab-a579-3709b4bcea49",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Selector Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

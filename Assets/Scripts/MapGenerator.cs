@@ -17,6 +17,7 @@ public class MapGenerator : MonoBehaviour
     public TileBase grass;
     public Animator UIController;
     public CameraBehavior cam;
+    private Selecter test;
 
     public void Start()
     {
@@ -24,6 +25,7 @@ public class MapGenerator : MonoBehaviour
         mapWidth = 0;
         mapHeight = 0;
         map = null;
+        test = null;
     }
 
     public void Generate()
@@ -43,6 +45,10 @@ public class MapGenerator : MonoBehaviour
                 map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, tiles[0]);
                 UIController.SetBool("Map Generated", true);
                 cam.Center(Ground);
+                
+                //Maybe find somwhere else to handle the transition
+                test = Selecter.createSelector(map);
+                Debug.Log(test.map);
             }
             else
             {
@@ -79,6 +85,14 @@ public class MapGenerator : MonoBehaviour
         {
             //Display this on the screen!
             Debug.Log("Please Enter a number!");
+        }
+    }
+
+    public void Update()
+    {
+        if(test != null)
+        {
+            Debug.Log(test.map);
         }
     }
 
