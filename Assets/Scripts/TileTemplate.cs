@@ -21,7 +21,6 @@ public class TileTemplate
 
     public Sprite GetSprite()
     {
-        Debug.Log(Resources.Load<Sprite>("TileSprites/" + sprite_name));
         return Resources.Load<Sprite>("TileSprites/" + sprite_name);
     }
 
