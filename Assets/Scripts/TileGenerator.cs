@@ -37,7 +37,7 @@ public class TileGenerator : MonoBehaviour
 
     public void AddTile()
     {
-        TileTemplate tile = new TileTemplate(idTextBox.text, option_to_sprite[spriteDropdown.value]);
+        TileTemplate tile = new TileTemplate(idTextBox.text, option_to_sprite[spriteDropdown.value].name);
         tiles.Add(tile);
 
         GameObject TilePreview = Resources.Load<GameObject>("Buttons/Tile-Preview");

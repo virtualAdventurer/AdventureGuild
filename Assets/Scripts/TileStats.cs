@@ -33,8 +33,8 @@ public class TileStats
     public TileStats(Tilemap tilemap, Vector3Int pos, TileTemplate template, int x, int y)
     {
         TilemapMember = tilemap;
-        Tile tile = new Tile();
-        tile.sprite = template.sprite;
+        Tile tile = Tile.CreateInstance<Tile>();
+        tile.sprite = template.GetSprite();
         TilemapMember.SetTile(pos, tile);
         Location = pos;
         m_x = x;

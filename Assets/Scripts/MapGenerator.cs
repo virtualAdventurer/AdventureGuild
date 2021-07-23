@@ -36,11 +36,11 @@ public class MapGenerator : MonoBehaviour
         {
             FileStream stream = new FileStream("Assets/Resources/TileData/Test.XML", FileMode.Open);
             XmlSerializer serializer = new XmlSerializer(typeof(List<TileTemplate>));
-            var tiles = serializer.Deserialize(stream);
+            List<TileTemplate> tiles = (List<TileTemplate>)serializer.Deserialize(stream);
             
-            if(/*tiles.Count >= 1*/true)
+            if(tiles.Count >= 1)
             {
-                map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, grass);
+                map = TileStats.GenerateBaseMap(mapWidth, mapHeight, Ground, tiles[0]);
                 UIController.SetBool("Map Generated", true);
                 cam.Center(Ground);
             }

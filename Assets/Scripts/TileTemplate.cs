@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class TileTemplate 
 {
-    public Sprite sprite {get; set;}
+    public string sprite_name {get; set;}
     public string id {get; set;}
 
     public TileTemplate()
     {
         id = "untitled";
-        sprite = null;
+        sprite_name = null;
     }
 
-    public TileTemplate(string m_id, Sprite m_sprite)
+    public TileTemplate(string m_id, string m_sprite)
     {
         id = m_id;
-        sprite = m_sprite;
+        sprite_name = m_sprite;
+    }
+
+    public Sprite GetSprite()
+    {
+        Debug.Log(Resources.Load<Sprite>("TileSprites/" + sprite_name));
+        return Resources.Load<Sprite>("TileSprites/" + sprite_name);
     }
 
 }

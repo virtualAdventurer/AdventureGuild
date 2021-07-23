@@ -1,24 +1,15 @@
 <?xml version="1.0"?>
 <ArrayOfTileTemplate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TileTemplate>
-    <sprite>
-      <name>grass-1</name>
-      <hideFlags>None</hideFlags>
-    </sprite>
-    <id>Test</id>
+    <sprite_name>dirt-1</sprite_name>
+    <id>Test1</id>
   </TileTemplate>
   <TileTemplate>
-    <sprite>
-      <name>dirt-1</name>
-      <hideFlags>None</hideFlags>
-    </sprite>
+    <sprite_name>grass-1</sprite_name>
     <id>Test2</id>
   </TileTemplate>
   <TileTemplate>
-    <sprite>
-      <name>grass-2</name>
-      <hideFlags>None</hideFlags>
-    </sprite>
+    <sprite_name>grass-2</sprite_name>
     <id>Test3</id>
   </TileTemplate>
 </ArrayOfTileTemplate>
