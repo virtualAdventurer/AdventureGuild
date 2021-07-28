@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour
     private string mapName;
     private int mapWidth;
     private int mapHeight;
-    private TileStats[,] map;
+    public TileStats[,] map;
     public Tilemap Ground;
     public TileBase grass;
     public Animator UIController;
@@ -48,7 +48,6 @@ public class MapGenerator : MonoBehaviour
                 
                 //Maybe find somwhere else to handle the transition
                 test = Selecter.createSelector(map);
-                Debug.Log(test.map);
             }
             else
             {
@@ -85,14 +84,6 @@ public class MapGenerator : MonoBehaviour
         {
             //Display this on the screen!
             Debug.Log("Please Enter a number!");
-        }
-    }
-
-    public void Update()
-    {
-        if(test != null)
-        {
-            Debug.Log(test.map);
         }
     }
 

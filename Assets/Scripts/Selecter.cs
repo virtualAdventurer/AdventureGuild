@@ -16,12 +16,12 @@ public class Selecter : MonoBehaviour
     static public Selecter createSelector(TileStats[,] m_map)
     {
         var g_ob = Resources.Load<GameObject>("Buttons/Pointer");
-        
+        GameObject n_ob = Instantiate(g_ob);
 
-        Selecter temp = g_ob.GetComponent<Selecter>();
+        Selecter temp = n_ob.GetComponent<Selecter>();
         temp.map = m_map;
         temp.transform.position = temp.map[temp.x, temp.y].Location;
-        Instantiate(g_ob);
+
 
         return temp;
     }
@@ -48,7 +48,7 @@ public class Selecter : MonoBehaviour
 
     private void AdjustPointer(int m_x, int m_y)
     {
-        Debug.Log(map);
+        //Debug.Log("Dibs");
         if(x + m_x >= 0 && x + m_x < map.GetLength(0))
             x += m_x;
         if(y + m_y >= 0 && y + m_y < map.GetLength(1))
