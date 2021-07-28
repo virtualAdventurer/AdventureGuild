@@ -16,6 +16,8 @@ public class TileGenerator : MonoBehaviour
     private Sprite[] spriteList;
     private List<TileTemplate> tiles;
     private Dictionary<int, Sprite> option_to_sprite;
+
+    //TODO: Maybe add some variables to deal with the magic numbers present in the UI
     void Start()
     {
         spriteList = Resources.LoadAll<Sprite>("TileSprites");
@@ -42,12 +44,11 @@ public class TileGenerator : MonoBehaviour
 
         GameObject TilePreviewTemp = Resources.Load<GameObject>("Buttons/Tile-Preview");
         GameObject TilePreview = Instantiate(TilePreviewTemp, sv_Content.transform);
-
-        
         
         //Add sprite
         Image display = TilePreview.GetComponentInChildren<Image>();
         display.sprite = option_to_sprite[spriteDropdown.value];
+
         //Add text
         Text display_name = TilePreview.GetComponentInChildren<Text>();
         display_name.text = idTextBox.text;
@@ -57,9 +58,8 @@ public class TileGenerator : MonoBehaviour
         content_transform.sizeDelta += new Vector2(0, 64 + 8);        
 
         //Set position inside the preview so it fits
-        //Why does the first Tile I generate use default values, it makes no sense?
         var preview_transform = TilePreview.GetComponent<RectTransform>();
-        preview_transform.position = new Vector3(0, -((tiles.Count) * 64) - ((tiles.Count) * 8) - 8, 0);        
+        preview_transform.localPosition = new Vector3(8, -((tiles.Count - 1) * 64) - ((tiles.Count - 1) * 8) - 8, 0);        
     }
 
     public void SaveTiles()
