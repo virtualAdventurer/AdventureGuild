@@ -47,7 +47,7 @@ public class MapGenerator : MonoBehaviour
                 cam.Center(Ground);
                 
                 //Maybe find somwhere else to handle the transition
-                test = Selecter.createSelector(map);
+                test = Selecter.createSelector(map, selectSpace);
             }
             else
             {
@@ -85,6 +85,11 @@ public class MapGenerator : MonoBehaviour
             //Display this on the screen!
             Debug.Log("Please Enter a number!");
         }
+    }
+
+    public void selectSpace(int x, int y)
+    {
+        Debug.Log("Create options, then remove selector");
     }
 
 }

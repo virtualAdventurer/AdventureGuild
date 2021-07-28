@@ -8,12 +8,9 @@ public class Selecter : MonoBehaviour
     public int x;
     public int y;
     public TileStats[,] map {set; get;}
-
-    /*public void Start()
-    {
-        transform.position = map[x,y].Location;
-    }*/
-    static public Selecter createSelector(TileStats[,] m_map)
+    public delegate void cursorDelegate(int m_x, int m_y);
+    private cursorDelegate cursorAction;
+    static public Selecter createSelector(TileStats[,] m_map, cursorDelegate act)
     {
         var g_ob = Resources.Load<GameObject>("Buttons/Pointer");
         GameObject n_ob = Instantiate(g_ob);
@@ -21,6 +18,7 @@ public class Selecter : MonoBehaviour
         Selecter temp = n_ob.GetComponent<Selecter>();
         temp.map = m_map;
         temp.transform.position = temp.map[temp.x, temp.y].Location;
+        temp.cursorAction = act;
 
 
         return temp;
@@ -46,9 +44,13 @@ public class Selecter : MonoBehaviour
         AdjustPointer(0, -1);
     }
 
+    public void OnSelect()
+    {
+        cursorAction(x, y);
+    }
+
     private void AdjustPointer(int m_x, int m_y)
     {
-        //Debug.Log("Dibs");
         if(x + m_x >= 0 && x + m_x < map.GetLength(0))
             x += m_x;
         if(y + m_y >= 0 && y + m_y < map.GetLength(1))
