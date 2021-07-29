@@ -109,6 +109,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Camera Move",
+            "id": "4e47ca28-1014-49d4-afdf-2f71ed727f6c",
+            "actions": [
+                {
+                    "name": "Cam Vertical",
+                    "type": "Value",
+                    "id": "33955800-9d46-46ec-82e1-ec3db3b33d09",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Cam Horizontal",
+                    "type": "Value",
+                    "id": "4fc51122-c866-4afa-9e15-798606f3b0fe",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5dc2b476-3ff9-453b-b715-78657793e659",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Cam Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d741499-b329-4432-b457-a136a5599f4c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Cam Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

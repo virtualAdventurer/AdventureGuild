@@ -5,21 +5,26 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(Camera))]
 public class CameraBehavior : MonoBehaviour
 {
     public float speed;
     private bool controlsActive;
     private Tilemap map;
     private Camera cam;
+    private float x_move;
+    private float y_move;
     // Start is called before the first frame update
     void Start()
     {
         cam = GetComponent<Camera>();
-        var warpedPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+        //var warpedPosition = new Vector2(Screen.width / 2, Screen.height / 2);
         //Appreantly this may not be recomended
         //Maybe find a better solutiong instead of using low level?
-        Mouse.current.WarpCursorPosition(warpedPosition);
-        InputState.Change(Mouse.current.position, warpedPosition);
+        //Mouse.current.WarpCursorPosition(warpedPosition);
+        //InputState.Change(Mouse.current.position, warpedPosition);
+        x_move = 0;
+        y_move = 0;
         controlsActive = false;
     }
 
@@ -28,7 +33,6 @@ public class CameraBehavior : MonoBehaviour
     {
         if(controlsActive)
         {
-            var mousePos = Mouse.current.position.ReadValue();
             Vector3 lowerCorner = cam.ViewportToWorldPoint(new Vector3(0, 0, 0));
             Vector3 upperCorner = cam.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
@@ -40,28 +44,19 @@ public class CameraBehavior : MonoBehaviour
             float height = cam.orthographicSize;
             float width = cam.aspect * height;
             
-            if(map.size.x > width * 2)
+            //TODO: write a comment explainning these calculations
+            if(map.size.x > width * 2
+                && (left > 0 || x_move > 0)
+                && (right < map.size.x || x_move < 0))
             {
-                if(mousePos.x <= 0 && left > 0)
-                {
-                    transform.Translate(Vector3.left * speed);
-                }
-                else if(mousePos.x >= Screen.width && right <= map.size.x)
-                {
-                    transform.Translate(Vector3.right * speed);
-                }
+                transform.Translate(Vector3.right * x_move * speed);
             }
 
-            if(map.size.y > height * 2)
+            if(map.size.y > height * 2
+                && (bottom > 0 || y_move > 0)
+                && (top < map.size.y || y_move < 0))
             {
-                if(mousePos.y <= 0 && bottom > 0)
-                {
-                    transform.Translate(Vector3.down * speed);
-                }
-                else if(mousePos.y >= Screen.height && top < map.size.y)
-                {
-                    transform.Translate(Vector3.up * speed);
-                }
+                transform.Translate(Vector3.up * y_move * speed);
             }
         }
     }
@@ -87,5 +82,15 @@ public class CameraBehavior : MonoBehaviour
 
         transform.position = move;
         controlsActive = true;
+    }
+
+    public void OnCamVertical(InputValue value)
+    {
+        y_move = value.Get<float>();
+    }
+
+    public void OnCamHorizontal(InputValue value)
+    {
+        x_move = value.Get<float>();
     }
 }
