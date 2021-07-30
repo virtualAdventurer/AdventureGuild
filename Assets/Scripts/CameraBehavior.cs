@@ -18,11 +18,6 @@ public class CameraBehavior : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        //var warpedPosition = new Vector2(Screen.width / 2, Screen.height / 2);
-        //Appreantly this may not be recomended
-        //Maybe find a better solutiong instead of using low level?
-        //Mouse.current.WarpCursorPosition(warpedPosition);
-        //InputState.Change(Mouse.current.position, warpedPosition);
         x_move = 0;
         y_move = 0;
         controlsActive = false;

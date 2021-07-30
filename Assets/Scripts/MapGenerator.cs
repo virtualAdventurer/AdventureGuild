@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using System;
 
 public class MapGenerator : MonoBehaviour
@@ -17,7 +17,8 @@ public class MapGenerator : MonoBehaviour
     public TileBase grass;
     public Animator UIController;
     public CameraBehavior cam;
-    private Selecter test;
+    public Canvas canvas;
+    private Selecter selecter;
 
     public void Start()
     {
@@ -25,7 +26,7 @@ public class MapGenerator : MonoBehaviour
         mapWidth = 0;
         mapHeight = 0;
         map = null;
-        test = null;
+        selecter = null;
     }
 
     public void Generate()
@@ -47,7 +48,7 @@ public class MapGenerator : MonoBehaviour
                 cam.Center(Ground);
                 
                 //Maybe find somwhere else to handle the transition
-                test = Selecter.createSelector(map, selectSpace);
+                selecter = Selecter.createSelector(map, selectSpace);
             }
             else
             {
@@ -89,7 +90,21 @@ public class MapGenerator : MonoBehaviour
 
     public void selectSpace(int x, int y)
     {
-        Debug.Log("Create options, then remove selector");
+        //Create the Tile Display Object
+        GameObject template = Resources.Load<GameObject>("Buttons/TileDisplay");
+        GameObject tile_display = Instantiate(template, canvas.transform);
+
+        //Get the tile we are selecting
+        TileStats tile = map[x, y];
+
+        //Remove Selector
+        Destroy(selecter.gameObject);
+        selecter = null;
+
+        //add image to tile display
+        Image background = tile_display.transform.Find("Background").GetComponent<Image>();
+        //This will be harder than I thought
+        //background.sprite = tile.
     }
 
 }
