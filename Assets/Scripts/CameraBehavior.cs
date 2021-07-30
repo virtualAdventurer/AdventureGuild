@@ -93,4 +93,14 @@ public class CameraBehavior : MonoBehaviour
     {
         x_move = value.Get<float>();
     }
+
+    public void OnCamHorizontalNegative(InputValue value)
+    {
+        x_move = -value.Get<float>();
+    }
+
+    public void OnCamVerticalNegative(InputValue value)
+    {
+        y_move = -value.Get<float>();
+    }
 }

@@ -129,6 +129,22 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Cam Vertical Negative",
+                    "type": "Value",
+                    "id": "f3ea05b5-7457-4221-9650-72f6d8406007",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Cam Horizontal Negative",
+                    "type": "Value",
+                    "id": "ce03b750-b76e-45e1-a31d-c83992b291fb",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -151,6 +167,28 @@
                     "processors": "",
                     "groups": "Keyboard & mouse",
                     "action": "Cam Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bc19ac1-3ef6-43f2-8d40-1e00683686cf",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Cam Vertical Negative",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffc8f3c8-d0bb-4b22-9566-81c67aa2e259",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & mouse",
+                    "action": "Cam Horizontal Negative",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
