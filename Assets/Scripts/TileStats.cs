@@ -8,7 +8,8 @@ public class TileStats
 {
     //Possible needed for adding script into Tiles
     public Vector3Int Location {get; set;}
-    public Tilemap TilemapMember {get; set;} 
+    public Tilemap TilemapMember {get; set;}
+    public Tile tile_render {get; set;} 
     public int m_x {get; set;}
     public int m_y {get; set;}
 
@@ -18,7 +19,7 @@ public class TileStats
     //Data for breadth first search
     public bool selectable {get; set;}
 
-    public TileStats(Tilemap tilemap, Vector3Int pos, TileBase sprite, int x, int y)
+    /*public TileStats(Tilemap tilemap, Vector3Int pos, TileBase sprite, int x, int y)
     {
         TilemapMember = tilemap;
         TilemapMember.SetTile(pos, sprite);
@@ -28,13 +29,14 @@ public class TileStats
 
         unit = null;
         selectable = false;
-    }
+    }*/
 
     public TileStats(Tilemap tilemap, Vector3Int pos, TileTemplate template, int x, int y)
     {
         TilemapMember = tilemap;
         Tile tile = Tile.CreateInstance<Tile>();
         tile.sprite = template.GetSprite();
+        tile_render = tile;
         TilemapMember.SetTile(pos, tile);
         Location = pos;
         m_x = x;
@@ -44,7 +46,12 @@ public class TileStats
         selectable = false;
     }
 
-    static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
+    public Sprite GetSprite()
+    {
+        return tile_render.sprite;
+    }
+
+    /*static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileBase sprite)
     {
         var map = new TileStats[width, height];
 
@@ -57,7 +64,7 @@ public class TileStats
                 }
             }
         return map;
-    }
+    }*/
 
     static public TileStats[,] GenerateBaseMap(int width, int height, Tilemap ground, TileTemplate template)
     {

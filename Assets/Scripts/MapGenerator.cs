@@ -102,9 +102,8 @@ public class MapGenerator : MonoBehaviour
         selecter = null;
 
         //add image to tile display
-        Image background = tile_display.transform.Find("Background").GetComponent<Image>();
-        //This will be harder than I thought
-        //background.sprite = tile.
+        Image display = tile_display.transform.Find("Sprite Display").GetComponent<Image>();        
+        display.sprite = tile.GetSprite();
     }
 
 }
