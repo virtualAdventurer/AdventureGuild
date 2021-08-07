@@ -104,6 +104,20 @@ public class MapGenerator : MonoBehaviour
         //add image to tile display
         Image display = tile_display.transform.Find("Sprite Display").GetComponent<Image>();        
         display.sprite = tile.GetSprite();
+
+        //Add Options for Tiles
+        Dropdown tile_options = tile_display.transform.Find("Tile Dropdown").GetComponent<Dropdown>();
+        
+        //Find a different place for this, seems like we should have this loaded already
+        FileStream stream = new FileStream("Assets/Resources/TileData/Test.XML", FileMode.Open);
+        XmlSerializer serializer = new XmlSerializer(typeof(List<TileTemplate>));
+        List<TileTemplate> tile_temps = (List<TileTemplate>)serializer.Deserialize(stream);
+
+        foreach(TileTemplate tile_temp in tile_temps)
+        {
+            Dropdown.OptionData option = new Dropdown.OptionData(tile_temp.id);
+            tile_options.options.Add(option);
+        }
     }
 
 }
