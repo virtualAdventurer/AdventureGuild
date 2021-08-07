@@ -943,6 +943,7 @@ MonoBehaviour:
   grass: {fileID: 11400000, guid: ccf3ee570cd443f4b806da2fc3be283a, type: 2}
   UIController: {fileID: 1871591389}
   cam: {fileID: 1384218943}
+  canvas: {fileID: 1871591386}
 --- !u!4 &1015826068
 Transform:
   m_ObjectHideFlags: 0
