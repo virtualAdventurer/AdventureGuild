@@ -19,6 +19,7 @@ public class MapGenerator : MonoBehaviour
     public CameraBehavior cam;
     public Canvas canvas;
     private Selecter selecter;
+    private Dropdown tile_options;
 
     public void Start()
     {
@@ -27,6 +28,7 @@ public class MapGenerator : MonoBehaviour
         mapHeight = 0;
         map = null;
         selecter = null;
+        tile_options = null;
     }
 
     public void Generate()
@@ -106,7 +108,11 @@ public class MapGenerator : MonoBehaviour
         display.sprite = tile.GetSprite();
 
         //Add Options for Tiles
-        Dropdown tile_options = tile_display.transform.Find("Tile Dropdown").GetComponent<Dropdown>();
+        tile_options = tile_display.transform.Find("Tile Dropdown").GetComponent<Dropdown>();
+
+        //Add functionality to button
+        Button submit = tile_display.transform.Find("Select Tile").GetComponent<Button>();
+        submit.onClick.AddListener(delegate { ActivateTile(); });
         
         //Find a different place for this, seems like we should have this loaded already
         FileStream stream = new FileStream("Assets/Resources/TileData/Test.XML", FileMode.Open);
@@ -117,6 +123,18 @@ public class MapGenerator : MonoBehaviour
         {
             Dropdown.OptionData option = new Dropdown.OptionData(tile_temp.id);
             tile_options.options.Add(option);
+        }
+    }
+
+    public void ActivateTile()
+    {
+        if(tile_options == null)
+        {
+            Debug.Log(0);
+        } 
+        else
+        {
+            Debug.Log(tile_options.value);
         }
     }
 
